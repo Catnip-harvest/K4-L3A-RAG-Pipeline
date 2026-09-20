@@ -235,6 +235,14 @@ with st.sidebar:
     )
     use_reranking = strategy == "Hybrid + RRF"
 
+    st.toggle(
+        "Luôn mở phân tích pipeline",
+        key="show_analysis",
+        value=False,
+        help="Mặc định mỗi câu trả lời chỉ hiện đáp án và nguồn. Bật cái này để "
+             "mọi lượt tự mở sẵn sơ đồ pipeline và các biểu đồ — tiện khi demo.",
+    )
+
     st.divider()
     st.markdown(
         '<div style="font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;'
@@ -385,7 +393,6 @@ def render_turn(message: dict[str, Any], turn: int, *, latest: bool) -> None:
     trace: dict[str, Any] = message.get("trace") or {}
     result: dict[str, Any] = message.get("result") or {}
     mode = message.get("mode")
-    query = message.get("query", "")
 
     if mode == "error":
         st.html(components.banner(
@@ -401,32 +408,7 @@ def render_turn(message: dict[str, Any], turn: int, *, latest: bool) -> None:
             kind="warn",
         ))
 
-    sources: list[dict[str, Any]] = result.get("sources") or []
-    refused = (
-        result.get("retrieval_source") == "none"
-        or bool(trace.get("refused"))
-        or not sources
-    )
-
-    # Numeric read-out first: it is the same four numbers the graphics expand on.
-    stages = {s.get("name"): s for s in (trace.get("stages") or [])}
-    decision = str(trace.get("decision") or result.get("retrieval_source") or "—")
-    st.html(components.metric_tiles([
-        ("Nhánh đã chọn", decision,
-         "vượt ngưỡng" if decision == "hybrid" else "dưới ngưỡng",
-         theme.COLORS["hybrid"] if decision == "hybrid" else theme.COLORS["fallback"]),
-        ("Dense tốt nhất", f"{float(trace.get('best_dense_score') or 0):.3f}",
-         f"ngưỡng {float(trace.get('score_threshold') or 0):.3f}",
-         theme.COLORS["dense"]),
-        ("Ứng viên dense / BM25",
-         f"{stages.get('dense', {}).get('count', 0)} / "
-         f"{stages.get('bm25', {}).get('count', 0)}",
-         f"RRF k = {stages.get('rrf', {}).get('k', 60)}", theme.COLORS["bm25"]),
-        ("Nguồn đã dùng", str(len(sources)),
-         f"top_k = {trace.get('top_k', '—')}", theme.COLORS["ok"]),
-        ("Thời gian", f"{float(trace.get('elapsed_ms') or 0):.0f} ms",
-         f"LLM {float(trace.get('llm_elapsed_ms') or 0):.0f} ms", theme.COLORS["ok"]),
-    ]))
+    _, _, sources, _, refused, _ = turn_facts(message)
 
     if refused:
         st.html(components.refusal_card(
@@ -434,62 +416,164 @@ def render_turn(message: dict[str, Any], turn: int, *, latest: bool) -> None:
             result.get("answer")
             or "Không đủ căn cứ trong tài liệu để trả lời câu hỏi này.",
         ))
+    elif mode == "retrieval-only":
+        st.html(components.banner(
+            "Không sinh được câu trả lời, nhưng phần truy hồi vẫn chạy — "
+            "xem các đoạn lấy được ở bảng dẫn chứng bên phải.",
+            kind="warn",
+        ))
+    else:
+        st.html(components.answer_card(
+            result.get("answer", ""), trace.get("citations") or [], turn, len(sources)
+        ))
+
+
+def turn_facts(message: dict[str, Any]) -> tuple:
+    """Rút các phần dùng chung giữa cột hội thoại và bảng dẫn chứng."""
+    trace: dict[str, Any] = message.get("trace") or {}
+    result: dict[str, Any] = message.get("result") or {}
+    sources: list[dict[str, Any]] = result.get("sources") or []
+    stages = {s.get("name"): s for s in (trace.get("stages") or [])}
+    refused = (
+        result.get("retrieval_source") == "none"
+        or bool(trace.get("refused"))
+        or not sources
+    )
+    decision = str(trace.get("decision") or result.get("retrieval_source") or "—")
+    return trace, result, sources, stages, refused, decision
+
+
+def render_evidence(message: dict[str, Any], turn: int) -> None:
+    """Bảng dẫn chứng bên phải: nguồn đã dùng và phần phân tích pipeline.
+
+    Tách khỏi cột hội thoại vì hai thứ này phục vụ hai nhu cầu khác nhau. Người
+    dùng đọc câu trả lời theo dòng chảy hội thoại; còn nguồn và sơ đồ là thứ để
+    ĐỐI CHIẾU, nên chúng phải đứng yên cạnh câu trả lời thay vì đẩy lượt tiếp
+    theo xuống dưới. Neo `#src-<turn>-<n>` vẫn hoạt động nguyên vẹn, và bấm số
+    [n] bây giờ còn dễ theo dõi hơn vì cả hai bên cùng nằm trong tầm mắt.
+    """
+    trace, result, sources, stages, refused, decision = turn_facts(message)
+    query = message.get("query", "")
+
+    st.markdown(
+        '<div style="font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;'
+        'color:#5C6E8C;font-weight:600;margin:2px 0 10px">Dẫn chứng</div>',
+        unsafe_allow_html=True,
+    )
+
+    st.html(components.metric_tiles([
+        ("Nhánh đã chọn", decision,
+         "vượt ngưỡng" if decision == "hybrid" else "dưới ngưỡng",
+         theme.COLORS["hybrid"] if decision == "hybrid" else theme.COLORS["fallback"]),
+        ("Dense tốt nhất", f"{float(trace.get('best_dense_score') or 0):.3f}",
+         f"ngưỡng {float(trace.get('score_threshold') or 0):.3f}",
+         theme.COLORS["dense"]),
+        ("Nguồn đã dùng", str(len(sources)),
+         f"top_k = {trace.get('top_k', '—')}", theme.COLORS["ok"]),
+        ("Thời gian", f"{float(trace.get('elapsed_ms') or 0):.0f} ms",
+         f"LLM {float(trace.get('llm_elapsed_ms') or 0):.0f} ms", theme.COLORS["ok"]),
+    ]))
+
+    if refused:
         weak = (
             (stages.get("rrf", {}).get("results")
              or stages.get("dense", {}).get("results") or [])[: trace.get("top_k", 5)]
         )
         if weak:
             st.markdown(
-                '<div style="font-size:.78rem;color:#8DA0C0;margin:6px 0 6px">'
+                '<div style="font-size:.78rem;color:#8DA0C0;margin:10px 0 6px">'
                 "Những đoạn gần nhất mà pipeline tìm được nhưng <b>không đạt ngưỡng</b> "
                 "— hiển thị để kiểm chứng, không dùng làm căn cứ trả lời:</div>",
                 unsafe_allow_html=True,
             )
-            st.html(components.source_list(
-                weak, turn=turn, query=query, dimmed=True
-            ))
-    elif mode == "retrieval-only":
-        st.html(components.source_list(sources, turn=turn, query=query))
-    else:
-        st.html(components.answer_card(
-            result.get("answer", ""), trace.get("citations") or [], turn, len(sources)
-        ))
+            st.html(components.source_list(weak, turn=turn, query=query, dimmed=True))
+    elif sources:
         st.markdown(
             '<div style="font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;'
-            'color:#5C6E8C;font-weight:600;margin:14px 0 8px">'
+            'color:#5C6E8C;font-weight:600;margin:12px 0 8px">'
             "Nguồn đã dùng · bấm số [n] trong câu trả lời để nhảy tới</div>",
             unsafe_allow_html=True,
         )
         st.html(components.source_list(sources, turn=turn, query=query))
 
-    st.write("")
-    if latest or st.session_state.get(f"expand_{turn}"):
+    gate = (
+        f"{float(trace.get('best_dense_score') or 0):.3f} vs ngưỡng "
+        f"{float(trace.get('score_threshold') or 0):.3f}"
+    )
+    with st.expander(
+        f"Pipeline đã quyết định thế nào  ·  {decision}  ·  {gate}",
+        expanded=st.session_state.get("show_analysis", False),
+    ):
         render_analytics(trace, turn)
+
+
+# Cột phải dính theo màn hình: cuộn hội thoại thì bảng dẫn chứng vẫn ở nguyên
+# chỗ, nên số [n] trong câu trả lời và thẻ nguồn tương ứng luôn cùng trong tầm mắt.
+st.markdown(
+    """
+    <style>
+      [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:nth-of-type(2) > div {
+        position: sticky; top: 8px;
+        max-height: calc(100vh - 32px); overflow-y: auto;
+        padding-right: 4px;
+      }
+      /* Hẹp quá thì hai cột bị bóp đến mức tên file vỡ từng ký tự. Dưới
+         1200px cho chúng xuống dòng thành một cột thay vì cố nhồi cạnh nhau. */
+      @media (max-width: 1200px) {
+        [data-testid="stHorizontalBlock"] { flex-wrap: wrap; }
+        [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] {
+          flex: 1 1 100% !important; min-width: 100% !important;
+        }
+        [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:nth-of-type(2) > div {
+          position: static; max-height: none; overflow-y: visible;
+        }
+      }
+      /* Tên file dài như so-tay-sinh-vien-k60.md không được cắt từng chữ cái. */
+      [data-testid="stColumn"] .src-meta, [data-testid="stColumn"] .src-title {
+        overflow-wrap: break-word; word-break: normal;
+      }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
+chat_col, evidence_col = st.columns([1.75, 1], gap="large")
+
+with chat_col:
+    for index, message in enumerate(st.session_state.messages):
+        if message["role"] == "user":
+            with st.chat_message("user", avatar=":material/person:"):
+                st.html(components.user_bubble(message["content"]))
+        else:
+            with st.chat_message("assistant", avatar=":material/hub:"):
+                render_turn(message, index, latest=False)
+
+    if not st.session_state.messages:
+        st.html(components.banner(
+            "Hỏi một câu về quy chế đào tạo hoặc dịch vụ sinh viên của trường. "
+            "Câu trả lời hiện ở đây, còn nguồn và sơ đồ pipeline hiện ở bảng dẫn "
+            "chứng bên phải. Thử nhanh bằng các câu hỏi mẫu ở thanh bên.",
+            kind="info",
+        ))
+
+with evidence_col:
+    # Chỉ hiển thị dẫn chứng của lượt mới nhất — đó là lượt đang được đọc.
+    last_reply = next(
+        (
+            (i, m) for i, m in reversed(list(enumerate(st.session_state.messages)))
+            if m["role"] == "assistant" and m.get("mode") != "error"
+        ),
+        None,
+    )
+    if last_reply is not None:
+        render_evidence(last_reply[1], last_reply[0])
     else:
-        with st.expander("Phân tích pipeline của lượt này"):
-            render_analytics(trace, turn, compact=True)
-            st.button(
-                "Mở đầy đủ biểu đồ", key=f"expand_btn_{turn}",
-                on_click=lambda t=turn: st.session_state.__setitem__(f"expand_{t}", True),
-            )
-
-
-last_index = len(st.session_state.messages) - 1
-for index, message in enumerate(st.session_state.messages):
-    if message["role"] == "user":
-        with st.chat_message("user", avatar=":material/person:"):
-            st.html(components.user_bubble(message["content"]))
-    else:
-        with st.chat_message("assistant", avatar=":material/hub:"):
-            render_turn(message, index, latest=index == last_index)
-
-if not st.session_state.messages:
-    st.html(components.banner(
-        "Hỏi một câu về quy chế đào tạo hoặc dịch vụ sinh viên của trường. "
-        "Mỗi câu trả lời sẽ kèm sơ đồ pipeline, bảng thay đổi thứ hạng do RRF "
-        "và toàn bộ nguồn đã dùng. Thử nhanh bằng các câu hỏi mẫu ở thanh bên.",
-        kind="info",
-    ))
+        st.markdown(
+            '<div style="font-size:.8rem;color:#5C6E8C;padding:18px 14px;'
+            'border:1px dashed #243350;border-radius:14px;text-align:center">'
+            "Nguồn và sơ đồ pipeline của câu trả lời sẽ hiện ở đây.</div>",
+            unsafe_allow_html=True,
+        )
 
 # --- input -------------------------------------------------------------------
 typed = st.chat_input("Nhập câu hỏi về quy chế hoặc dịch vụ sinh viên…")
