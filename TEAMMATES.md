@@ -1,6 +1,6 @@
 # Thành viên — Lab 08: RAG Pipeline
 
-Lớp K4-L3A · Repository: `Catnip-harvest/K4-L3A-RAG-Pipeline` · Nhánh mặc định: `main`
+Lớp K4-L3A · Repository: `Catnip-harvest/K4A-Day08-02563-HoangQuocViet` · Nhánh mặc định: `main`
 
 ## Thành viên
 
