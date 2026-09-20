@@ -1,0 +1,1780 @@
+{
+  "run_date": "2026-09-20",
+  "top_k": 5,
+  "llm_used": true,
+  "configs": {
+    "A": {
+      "label": "dense-only",
+      "use_reranking": false,
+      "balanced": false
+    },
+    "B": {
+      "label": "hybrid + RRF",
+      "use_reranking": true,
+      "balanced": false
+    },
+    "C": {
+      "label": "hybrid + RRF, can bang doc_type",
+      "use_reranking": true,
+      "balanced": true
+    }
+  },
+  "summary": {
+    "faithfulness": {
+      "A": 0.8899,
+      "B": 0.8937,
+      "C": 0.9354,
+      "delta_B": 0.0038,
+      "delta_C": 0.0455
+    },
+    "answer_relevance": {
+      "A": 0.462,
+      "B": 0.4679,
+      "C": 0.5036,
+      "delta_B": 0.0059,
+      "delta_C": 0.0416
+    },
+    "context_recall": {
+      "A": 0.75,
+      "B": 0.7188,
+      "C": 0.7188,
+      "delta_B": -0.0312,
+      "delta_C": -0.0312
+    },
+    "context_precision": {
+      "A": 0.5822,
+      "B": 0.586,
+      "C": 0.6632,
+      "delta_B": 0.0038,
+      "delta_C": 0.081
+    },
+    "average": {
+      "A": 0.671,
+      "B": 0.6666,
+      "C": 0.7053,
+      "delta_B": -0.0044,
+      "delta_C": 0.0343
+    }
+  },
+  "rows": [
+    {
+      "id": "Q01",
+      "type": "lexical",
+      "question": "Ký túc xá của trường có bao nhiêu phòng và sức chứa bao nhiêu sinh viên?",
+      "config": "A",
+      "answer": "Ký túc xá của trường có tổng số 214 phòng với sức chứa 1500 sinh viên [1].",
+      "refused": false,
+      "retrieval_source": "hybrid",
+      "best_dense_score": 0.9136,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "news/ban-quan-ly-ky-tuc-xa.md",
+        "news/ban-quan-ly-ky-tuc-xa.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "news/ban-quan-ly-ky-tuc-xa.md",
+        "news/ban-quan-ly-ky-tuc-xa.md"
+      ],
+      "elapsed_ms": 22297.0,
+      "llm_ms": 3443.3,
+      "citations": [
+        "[1]"
+      ],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 1.0,
+        "context_precision": 0.8875,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.7272727272727274
+      }
+    },
+    {
+      "id": "Q02",
+      "type": "lexical",
+      "question": "Học phí một tín chỉ của các ngành khối ngành III năm học 2024-2025 là bao nhiêu?",
+      "config": "A",
+      "answer": "Học phí một tín chỉ của các ngành khối ngành III năm học 2024-2025 được quy định như sau:\n- Chương trình chuẩn: 398.060 đồng/tín chỉ [4].\n- Chương trình tiên tiến, chất lượng cao: 694.935 đồng/tín chỉ [4].\n- Đối với trình độ thạc sĩ: 671.429 đồng/tín chỉ [5].",
+      "refused": false,
+      "retrieval_source": "hybrid",
+      "best_dense_score": 0.9236,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "legal/de-an-tuyen-sinh-2025.md",
+        "legal/de-an-tuyen-sinh-2025.md",
+        "legal/de-an-tuyen-sinh-2025.md",
+        "legal/de-an-tuyen-sinh-2025.md",
+        "legal/de-an-tuyen-sinh-2025.md"
+      ],
+      "elapsed_ms": 2551.8,
+      "llm_ms": 2517.9,
+      "citations": [
+        "[4]",
+        "[5]"
+      ],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 1.0,
+        "context_precision": 1.0,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.6382978723404255
+      }
+    },
+    {
+      "id": "Q03",
+      "type": "lexical",
+      "question": "Phòng Chăm sóc người học được thành lập theo quyết định số nào?",
+      "config": "A",
+      "answer": "Phòng Chăm sóc người học được thành lập theo Quyết định số 2109/QĐ-ĐHGTVT [1].",
+      "refused": false,
+      "retrieval_source": "hybrid",
+      "best_dense_score": 0.8909,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "news/phong-cong-tac-chinh-tri-va-sinh-vien.md",
+        "news/phong-cong-tac-chinh-tri-va-sinh-vien.md",
+        "news/phong-cong-tac-chinh-tri-va-sinh-vien.md",
+        "news/tram-y-te.md",
+        "news/phong-cong-tac-chinh-tri-va-sinh-vien.md"
+      ],
+      "elapsed_ms": 6478.8,
+      "llm_ms": 6446.0,
+      "citations": [
+        "[1]"
+      ],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 1.0,
+        "context_precision": 0.95,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.631578947368421
+      }
+    },
+    {
+      "id": "Q04",
+      "type": "lexical",
+      "question": "Tổng chỉ tiêu tuyển sinh năm 2025 cho chương trình chuẩn và chất lượng cao là bao nhiêu?",
+      "config": "A",
+      "answer": "Tổng chỉ tiêu tuyển sinh năm 2025 cho các chương trình đào tạo chuẩn và chương trình đào tạo chất lượng cao là 6320 chỉ tiêu [1].",
+      "refused": false,
+      "retrieval_source": "hybrid",
+      "best_dense_score": 0.8957,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "legal/de-an-tuyen-sinh-2025.md",
+        "legal/de-an-tuyen-sinh-2025.md",
+        "legal/de-an-tuyen-sinh-2025.md",
+        "legal/de-an-tuyen-sinh-2025.md",
+        "legal/de-an-tuyen-sinh-2025.md"
+      ],
+      "elapsed_ms": 6195.5,
+      "llm_ms": 6164.0,
+      "citations": [
+        "[1]"
+      ],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 1.0,
+        "context_precision": 1.0,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.5625
+      }
+    },
+    {
+      "id": "Q05",
+      "type": "lexical",
+      "question": "Chương trình thạc sĩ yêu cầu khối lượng tối thiểu bao nhiêu tín chỉ?",
+      "config": "A",
+      "answer": "Chương trình đào tạo trình độ thạc sĩ yêu cầu khối lượng kiến thức là 60 tín chỉ đối với các đối tượng tốt nghiệp đại học cùng nhóm ngành [1].",
+      "refused": false,
+      "retrieval_source": "hybrid",
+      "best_dense_score": 0.8988,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "legal/qc-dao-tao-thac-si-2021.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/qc-dao-tao-thac-si-2021.md",
+        "legal/qc-dao-tao-thac-si-2021.md",
+        "legal/so-tay-sinh-vien-k60.md"
+      ],
+      "elapsed_ms": 4378.8,
+      "llm_ms": 4347.0,
+      "citations": [
+        "[1]"
+      ],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 1.0,
+        "context_precision": 0.8055555555555555,
+        "faithfulness": 0.96,
+        "answer_relevance": 0.5641025641025641
+      }
+    },
+    {
+      "id": "Q06",
+      "type": "semantic",
+      "question": "Điểm trung bình thấp tới mức nào thì sinh viên năm nhất bị cảnh báo?",
+      "config": "A",
+      "answer": "Sinh viên năm thứ nhất bị cảnh báo kết quả học tập khi thuộc một trong các trường hợp sau:\n- Điểm trung bình chung tích lũy đạt dưới 1,20 [1], [2].\n- Điểm trung bình chung học kỳ đầu của khóa học đạt dưới 0,80 [3].",
+      "refused": false,
+      "retrieval_source": "hybrid",
+      "best_dense_score": 0.8805,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/de-an-tuyen-sinh-2025.md"
+      ],
+      "elapsed_ms": 3440.7,
+      "llm_ms": 3411.0,
+      "citations": [
+        "[1]",
+        "[2]",
+        "[3]"
+      ],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 1.0,
+        "context_precision": 1.0,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.6829268292682926
+      }
+    },
+    {
+      "id": "Q07",
+      "type": "semantic",
+      "question": "Muốn tìm sách của thư viện khi không có mặt ở trường thì làm thế nào?",
+      "config": "A",
+      "answer": "Bạn có thể tra cứu tài liệu trực tuyến thông qua hệ thống OPAC tại địa chỉ: http://opac.utc.edu.vn [2], [4].",
+      "refused": false,
+      "retrieval_source": "hybrid",
+      "best_dense_score": 0.8728,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "legal/so-tay-sinh-vien-k60.md",
+        "news/trung-tam-thong-tin-thu-vien.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "news/trung-tam-thong-tin-thu-vien.md",
+        "legal/so-tay-sinh-vien-k60.md"
+      ],
+      "elapsed_ms": 3619.1,
+      "llm_ms": 3583.6,
+      "citations": [
+        "[2]",
+        "[4]"
+      ],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 1.0,
+        "context_precision": 0.5,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.7741935483870968
+      }
+    },
+    {
+      "id": "Q08",
+      "type": "semantic",
+      "question": "Đơn vị nào lo việc khám sức khỏe cho sinh viên mới nhập học?",
+      "config": "A",
+      "answer": "Trạm Y tế là đơn vị tổ chức khám sức khỏe cho sinh viên mới nhập học [1]. Việc khám sức khỏe được thực hiện tại nhà N2, Trường Đại học Giao thông vận tải [5].",
+      "refused": false,
+      "retrieval_source": "hybrid",
+      "best_dense_score": 0.8959,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "news/tram-y-te.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/so-tay-ho-tro-co-van-hoc-tap.md",
+        "legal/so-tay-sinh-vien-k60.md"
+      ],
+      "elapsed_ms": 2863.1,
+      "llm_ms": 2832.7,
+      "citations": [
+        "[1]",
+        "[5]"
+      ],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 1.0,
+        "context_precision": 1.0,
+        "faithfulness": 0.9285714285714286,
+        "answer_relevance": 0.5789473684210525
+      }
+    },
+    {
+      "id": "Q09",
+      "type": "semantic",
+      "question": "Sinh viên bị mất tài sản trong khuôn viên trường thì báo cho đơn vị nào?",
+      "config": "A",
+      "answer": "Tôi không thể xác minh thông tin này từ nguồn hiện có.",
+      "refused": true,
+      "retrieval_source": "none",
+      "best_dense_score": 0.8634,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/so-tay-ho-tro-co-van-hoc-tap.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/so-tay-sinh-vien-k60.md"
+      ],
+      "elapsed_ms": 4413.1,
+      "llm_ms": 4384.1,
+      "citations": [],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 0.0,
+        "context_precision": 0.0,
+        "faithfulness": 0.375,
+        "answer_relevance": 0.0
+      }
+    },
+    {
+      "id": "Q10",
+      "type": "semantic",
+      "question": "Học trực tuyến của trường do đơn vị nào vận hành?",
+      "config": "A",
+      "answer": "Việc vận hành đào tạo trực tuyến của trường do Trung tâm Đào tạo trực tuyến UTC đảm nhiệm [1], [3]. Trung tâm này có nhiệm vụ tổ chức đào tạo, quản lý học viên, giáo viên, khóa học, bảng điểm [1], cũng như xây dựng và quản lý cơ sở hạ tầng phục vụ đào tạo trực tuyến như hệ thống phần cứng, nền tảng học tập, quản lý học liệu và phòng học trực tuyến [3].",
+      "refused": false,
+      "retrieval_source": "hybrid",
+      "best_dense_score": 0.8732,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "news/trung-tam-dao-tao-truc-tuyen-utc.md",
+        "legal/qc-dao-tao-thac-si-2021.md",
+        "news/trung-tam-dao-tao-truc-tuyen-utc.md",
+        "news/trung-tam-dao-tao-truc-tuyen-utc.md",
+        "news/tram-y-te.md"
+      ],
+      "elapsed_ms": 3824.4,
+      "llm_ms": 3793.2,
+      "citations": [
+        "[1]",
+        "[3]"
+      ],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 1.0,
+        "context_precision": 0.8055555555555555,
+        "faithfulness": 0.9468325791855203,
+        "answer_relevance": 0.2857142857142857
+      }
+    },
+    {
+      "id": "Q11",
+      "type": "confusable",
+      "question": "Đơn vị nào chủ trì việc đánh giá kết quả học tập của sinh viên?",
+      "config": "A",
+      "answer": "Tôi không thể xác minh thông tin này từ nguồn hiện có.",
+      "refused": true,
+      "retrieval_source": "none",
+      "best_dense_score": 0.8733,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/qc-dao-tao-thac-si-2021.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/so-tay-sinh-vien-k60.md"
+      ],
+      "elapsed_ms": 4454.8,
+      "llm_ms": 4413.0,
+      "citations": [],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 0.0,
+        "context_precision": 0.0,
+        "faithfulness": 0.125,
+        "answer_relevance": 0.0
+      }
+    },
+    {
+      "id": "Q12",
+      "type": "conflict",
+      "question": "Ai quản lý ký túc xá của trường?",
+      "config": "A",
+      "answer": "Ban Quản lý Ký túc xá là đơn vị có chức năng giúp Hiệu trưởng quản lý toàn diện khu ký túc xá của trường [1]. Hiện tại, Trưởng ban là ThS. Mai Đức Anh và Phó Trưởng ban là CN. Hàn Xuân Trung [4].",
+      "refused": false,
+      "retrieval_source": "hybrid",
+      "best_dense_score": 0.9079,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "news/ban-quan-ly-ky-tuc-xa.md",
+        "news/ban-quan-ly-ky-tuc-xa.md",
+        "news/ban-quan-ly-ky-tuc-xa.md",
+        "news/ban-quan-ly-ky-tuc-xa.md",
+        "legal/so-tay-sinh-vien-k60.md"
+      ],
+      "elapsed_ms": 5241.1,
+      "llm_ms": 5204.2,
+      "citations": [
+        "[1]",
+        "[4]"
+      ],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 0.0,
+        "context_precision": 0.0,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.10714285714285715
+      }
+    },
+    {
+      "id": "Q13",
+      "type": "multi_hop",
+      "question": "Hỏi về học bổng và vay vốn tín dụng đào tạo thì liên hệ đơn vị nào?",
+      "config": "A",
+      "answer": "Để thực hiện các thủ tục liên quan đến học bổng và vay vốn tín dụng, bạn có thể tham khảo các thông tin sau:\n\n*   **Vay vốn tín dụng:** Sinh viên đăng ký online thông qua dịch vụ trực tuyến tại website http://sis.utc.edu.vn và nhận kết quả tại Văn phòng Hỗ trợ sinh viên (P105 – Nhà N2) [2].\n*   **Học bổng:** Sinh viên liên hệ với Bộ môn trực thuộc hoặc theo dõi các trang thông tin điện tử của Trường, Khoa, Bộ môn để cập nhật thông tin [5]. Đối với cách tính học bổng khuyến khích học tập (KKHT), sinh viên thực hiện theo quy định của Trường và Khoa Điện - Điện tử [5].",
+      "refused": false,
+      "retrieval_source": "hybrid",
+      "best_dense_score": 0.8682,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "legal/so-tay-ho-tro-co-van-hoc-tap.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/so-tay-ho-tro-co-van-hoc-tap.md"
+      ],
+      "elapsed_ms": 5134.6,
+      "llm_ms": 5094.7,
+      "citations": [
+        "[2]",
+        "[5]"
+      ],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 1.0,
+        "context_precision": 0.0,
+        "faithfulness": 0.9035087719298245,
+        "answer_relevance": 0.2391304347826087
+      }
+    },
+    {
+      "id": "Q14",
+      "type": "multi_hop",
+      "question": "Học phí thu theo tín chỉ, vậy đơn vị nào chịu trách nhiệm thu học phí của sinh viên?",
+      "config": "A",
+      "answer": "Việc thu học phí của sinh viên được thực hiện qua Ngân hàng Agribank [2], [4].",
+      "refused": false,
+      "retrieval_source": "hybrid",
+      "best_dense_score": 0.8852,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/so-tay-sinh-vien-k60.md"
+      ],
+      "elapsed_ms": 6012.8,
+      "llm_ms": 5972.5,
+      "citations": [
+        "[2]",
+        "[4]"
+      ],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 0.0,
+        "context_precision": 0.0,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.21428571428571427
+      }
+    },
+    {
+      "id": "Q15",
+      "type": "multi_part",
+      "question": "Tra cứu tài liệu thư viện trực tuyến ở đâu và thư viện phục vụ những đối tượng nào?",
+      "config": "A",
+      "answer": "Bạn có thể tra cứu tài liệu trực tuyến tại địa chỉ: http://opac.utc.edu.vn [2], [4].\n\nĐối tượng bạn đọc của thư viện bao gồm: Giảng viên, cán bộ nghiên cứu, nghiên cứu sinh, học viên cao học và sinh viên trong và ngoài Trường [4].",
+      "refused": false,
+      "retrieval_source": "hybrid",
+      "best_dense_score": 0.8885,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "legal/so-tay-sinh-vien-k60.md",
+        "news/trung-tam-thong-tin-thu-vien.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "news/trung-tam-thong-tin-thu-vien.md",
+        "news/trung-tam-thong-tin-thu-vien.md"
+      ],
+      "elapsed_ms": 4311.2,
+      "llm_ms": 4272.6,
+      "citations": [
+        "[2]",
+        "[4]"
+      ],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 1.0,
+        "context_precision": 0.5333333333333333,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.8679245283018869
+      }
+    },
+    {
+      "id": "Q16",
+      "type": "lexical",
+      "question": "Thạc sĩ hình thức vừa làm vừa học có kế hoạch học tập chuẩn bao lâu?",
+      "config": "A",
+      "answer": "Thời gian theo kế hoạch học tập chuẩn toàn khóa đối với hình thức đào tạo thạc sĩ vừa làm vừa học là 2,5 năm [1], [4].",
+      "refused": false,
+      "retrieval_source": "hybrid",
+      "best_dense_score": 0.9058,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "legal/qc-dao-tao-thac-si-2021.md",
+        "legal/de-an-tuyen-sinh-2025.md",
+        "legal/qc-dao-tao-thac-si-2021.md",
+        "legal/de-an-tuyen-sinh-2025.md",
+        "legal/so-tay-sinh-vien-k60.md"
+      ],
+      "elapsed_ms": 2344.9,
+      "llm_ms": 2302.3,
+      "citations": [
+        "[1]",
+        "[4]"
+      ],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 1.0,
+        "context_precision": 0.8333333333333333,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.5185185185185185
+      }
+    },
+    {
+      "id": "Q17",
+      "type": "out_of_domain",
+      "question": "Giá vé máy bay từ Hà Nội đi Đà Nẵng hiện nay là bao nhiêu?",
+      "config": "A",
+      "answer": "Tôi không thể xác minh thông tin này từ nguồn hiện có.",
+      "refused": true,
+      "retrieval_source": "none",
+      "best_dense_score": 0.824,
+      "fallback_triggered": true,
+      "retrieved_docs": [
+        "legal/de-an-tuyen-sinh-2025.md",
+        "legal/qc-dao-tao-thac-si-2021.md",
+        "legal/so-tay-ho-tro-co-van-hoc-tap.md",
+        "legal/de-an-tuyen-sinh-2025.md",
+        "legal/de-an-tuyen-sinh-2025.md"
+      ],
+      "elapsed_ms": 6928.2,
+      "llm_ms": 6840.4,
+      "citations": [],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {},
+      "correct_refusal": true
+    },
+    {
+      "id": "Q18",
+      "type": "out_of_domain",
+      "question": "Trường Đại học Giao thông Vận tải có đào tạo tiến sĩ ngành Y khoa không?",
+      "config": "A",
+      "answer": "Tôi không thể xác minh thông tin này từ nguồn hiện có.",
+      "refused": true,
+      "retrieval_source": "none",
+      "best_dense_score": 0.883,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "legal/qc-dao-tao-thac-si-2021.md",
+        "legal/qc-dao-tao-thac-si-2021.md",
+        "legal/de-an-tuyen-sinh-2025.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/qc-dao-tao-thac-si-2021.md"
+      ],
+      "elapsed_ms": 6011.2,
+      "llm_ms": 5967.3,
+      "citations": [],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {},
+      "correct_refusal": true
+    },
+    {
+      "id": "Q01",
+      "type": "lexical",
+      "question": "Ký túc xá của trường có bao nhiêu phòng và sức chứa bao nhiêu sinh viên?",
+      "config": "B",
+      "answer": "Ký túc xá của trường có 214 phòng với sức chứa 1500 sinh viên [1].",
+      "refused": false,
+      "retrieval_source": "hybrid",
+      "best_dense_score": 0.9136,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "news/ban-quan-ly-ky-tuc-xa.md",
+        "news/ban-quan-ly-ky-tuc-xa.md",
+        "news/ban-quan-ly-ky-tuc-xa.md",
+        "news/ban-quan-ly-ky-tuc-xa.md",
+        "legal/so-tay-sinh-vien-k60.md"
+      ],
+      "elapsed_ms": 8441.9,
+      "llm_ms": 8401.1,
+      "citations": [
+        "[1]"
+      ],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 1.0,
+        "context_precision": 1.0,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.6451612903225806
+      }
+    },
+    {
+      "id": "Q02",
+      "type": "lexical",
+      "question": "Học phí một tín chỉ của các ngành khối ngành III năm học 2024-2025 là bao nhiêu?",
+      "config": "B",
+      "answer": "Học phí một tín chỉ của các ngành khối ngành III năm học 2024-2025 được quy định như sau:\n\n- Đối với trình độ thạc sĩ: 671.429 đồng/tín chỉ [2].\n- Đối với chương trình chuẩn: 398.060 đồng/tín chỉ [5].\n- Đối với chương trình tiên tiến, chất lượng cao: 694.935 đồng/tín chỉ [5].",
+      "refused": false,
+      "retrieval_source": "hybrid",
+      "best_dense_score": 0.9236,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "legal/de-an-tuyen-sinh-2025.md",
+        "legal/de-an-tuyen-sinh-2025.md",
+        "legal/de-an-tuyen-sinh-2025.md",
+        "legal/de-an-tuyen-sinh-2025.md",
+        "legal/de-an-tuyen-sinh-2025.md"
+      ],
+      "elapsed_ms": 8976.5,
+      "llm_ms": 8938.6,
+      "citations": [
+        "[2]",
+        "[5]"
+      ],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 1.0,
+        "context_precision": 1.0,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.6382978723404255
+      }
+    },
+    {
+      "id": "Q03",
+      "type": "lexical",
+      "question": "Phòng Chăm sóc người học được thành lập theo quyết định số nào?",
+      "config": "B",
+      "answer": "Phòng Chăm sóc người học được thành lập theo Quyết định số 2109/QĐ-ĐHGTVT [1].",
+      "refused": false,
+      "retrieval_source": "hybrid",
+      "best_dense_score": 0.8909,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "news/phong-cong-tac-chinh-tri-va-sinh-vien.md",
+        "news/phong-cong-tac-chinh-tri-va-sinh-vien.md",
+        "news/phong-cong-tac-chinh-tri-va-sinh-vien.md",
+        "news/phong-cong-tac-chinh-tri-va-sinh-vien.md",
+        "news/tram-y-te.md"
+      ],
+      "elapsed_ms": 4330.0,
+      "llm_ms": 4295.7,
+      "citations": [
+        "[1]"
+      ],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 1.0,
+        "context_precision": 1.0,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.631578947368421
+      }
+    },
+    {
+      "id": "Q04",
+      "type": "lexical",
+      "question": "Tổng chỉ tiêu tuyển sinh năm 2025 cho chương trình chuẩn và chất lượng cao là bao nhiêu?",
+      "config": "B",
+      "answer": "Tổng chỉ tiêu tuyển sinh năm 2025 cho các chương trình đào tạo chuẩn và chương trình đào tạo chất lượng cao là 6320 chỉ tiêu [1].",
+      "refused": false,
+      "retrieval_source": "hybrid",
+      "best_dense_score": 0.8957,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "legal/de-an-tuyen-sinh-2025.md",
+        "legal/de-an-tuyen-sinh-2025.md",
+        "legal/de-an-tuyen-sinh-2025.md",
+        "legal/de-an-tuyen-sinh-2025.md",
+        "legal/de-an-tuyen-sinh-2025.md"
+      ],
+      "elapsed_ms": 4006.3,
+      "llm_ms": 3969.6,
+      "citations": [
+        "[1]"
+      ],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 1.0,
+        "context_precision": 1.0,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.5625
+      }
+    },
+    {
+      "id": "Q05",
+      "type": "lexical",
+      "question": "Chương trình thạc sĩ yêu cầu khối lượng tối thiểu bao nhiêu tín chỉ?",
+      "config": "B",
+      "answer": "Chương trình đào tạo trình độ thạc sĩ yêu cầu khối lượng kiến thức là 60 tín chỉ đối với các đối tượng tốt nghiệp đại học cùng nhóm ngành [1].",
+      "refused": false,
+      "retrieval_source": "hybrid",
+      "best_dense_score": 0.8988,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "legal/qc-dao-tao-thac-si-2021.md",
+        "legal/qc-dao-tao-thac-si-2021.md",
+        "legal/qc-dao-tao-thac-si-2021.md",
+        "legal/de-an-tuyen-sinh-2025.md",
+        "legal/so-tay-sinh-vien-k60.md"
+      ],
+      "elapsed_ms": 6413.2,
+      "llm_ms": 6383.9,
+      "citations": [
+        "[1]"
+      ],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 1.0,
+        "context_precision": 1.0,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.5641025641025641
+      }
+    },
+    {
+      "id": "Q06",
+      "type": "semantic",
+      "question": "Điểm trung bình thấp tới mức nào thì sinh viên năm nhất bị cảnh báo?",
+      "config": "B",
+      "answer": "Sinh viên năm thứ nhất bị cảnh báo kết quả học tập nếu điểm trung bình chung tích lũy đạt dưới 1,20 [1], [3].",
+      "refused": false,
+      "retrieval_source": "hybrid",
+      "best_dense_score": 0.8805,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/de-an-tuyen-sinh-2025.md",
+        "legal/so-tay-sinh-vien-k60.md"
+      ],
+      "elapsed_ms": 7799.4,
+      "llm_ms": 7763.9,
+      "citations": [
+        "[1]",
+        "[3]"
+      ],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 1.0,
+        "context_precision": 0.95,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.8
+      }
+    },
+    {
+      "id": "Q07",
+      "type": "semantic",
+      "question": "Muốn tìm sách của thư viện khi không có mặt ở trường thì làm thế nào?",
+      "config": "B",
+      "answer": "Bạn có thể tra cứu tài liệu trực tuyến thông qua hệ thống OPAC tại địa chỉ http://opac.utc.edu.vn hoặc lib.utc.edu.vn/opac [2], [5].",
+      "refused": false,
+      "retrieval_source": "hybrid",
+      "best_dense_score": 0.8728,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "legal/so-tay-sinh-vien-k60.md",
+        "news/trung-tam-thong-tin-thu-vien.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/so-tay-sinh-vien-k60.md"
+      ],
+      "elapsed_ms": 5105.5,
+      "llm_ms": 4980.7,
+      "citations": [
+        "[2]",
+        "[5]"
+      ],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 1.0,
+        "context_precision": 0.5,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.7499999999999999
+      }
+    },
+    {
+      "id": "Q08",
+      "type": "semantic",
+      "question": "Đơn vị nào lo việc khám sức khỏe cho sinh viên mới nhập học?",
+      "config": "B",
+      "answer": "Trạm Y tế là đơn vị tổ chức khám sức khỏe cho sinh viên mới nhập học [1]. Việc khám sức khỏe cho sinh viên mới vào trường được tổ chức tại Trạm Y tế Nhà N2, Trường Đại học Giao thông vận tải [4].",
+      "refused": false,
+      "retrieval_source": "hybrid",
+      "best_dense_score": 0.8959,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "news/tram-y-te.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "news/tram-y-te.md"
+      ],
+      "elapsed_ms": 5166.2,
+      "llm_ms": 5134.7,
+      "citations": [
+        "[1]",
+        "[4]"
+      ],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 1.0,
+        "context_precision": 0.7,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.6111111111111112
+      }
+    },
+    {
+      "id": "Q09",
+      "type": "semantic",
+      "question": "Sinh viên bị mất tài sản trong khuôn viên trường thì báo cho đơn vị nào?",
+      "config": "B",
+      "answer": "Tôi không thể xác minh thông tin này từ nguồn hiện có.",
+      "refused": true,
+      "retrieval_source": "none",
+      "best_dense_score": 0.8634,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/so-tay-ho-tro-co-van-hoc-tap.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/so-tay-ho-tro-co-van-hoc-tap.md"
+      ],
+      "elapsed_ms": 4597.1,
+      "llm_ms": 4565.8,
+      "citations": [],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 0.0,
+        "context_precision": 0.0,
+        "faithfulness": 0.375,
+        "answer_relevance": 0.0
+      }
+    },
+    {
+      "id": "Q10",
+      "type": "semantic",
+      "question": "Học trực tuyến của trường do đơn vị nào vận hành?",
+      "config": "B",
+      "answer": "Việc vận hành đào tạo trực tuyến của trường do Trung tâm Đào tạo trực tuyến UTC đảm nhiệm [1], [3]. Trung tâm này có nhiệm vụ tổ chức đào tạo, quản lý học viên, giáo viên, khóa học, bảng điểm [1], cũng như xây dựng và quản lý cơ sở hạ tầng phục vụ đào tạo trực tuyến như hệ thống phần cứng, nền tảng học tập, học liệu và phòng thu [3].",
+      "refused": false,
+      "retrieval_source": "hybrid",
+      "best_dense_score": 0.8732,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "news/trung-tam-dao-tao-truc-tuyen-utc.md",
+        "legal/qc-dao-tao-thac-si-2021.md",
+        "news/trung-tam-dao-tao-truc-tuyen-utc.md",
+        "news/trung-tam-dao-tao-truc-tuyen-utc.md",
+        "news/trung-tam-dao-tao-truc-tuyen-utc.md"
+      ],
+      "elapsed_ms": 5035.9,
+      "llm_ms": 5004.1,
+      "citations": [
+        "[1]",
+        "[3]"
+      ],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 1.0,
+        "context_precision": 0.8041666666666667,
+        "faithfulness": 0.9472527472527472,
+        "answer_relevance": 0.27999999999999997
+      }
+    },
+    {
+      "id": "Q11",
+      "type": "confusable",
+      "question": "Đơn vị nào chủ trì việc đánh giá kết quả học tập của sinh viên?",
+      "config": "B",
+      "answer": "Tôi không thể xác minh thông tin này từ nguồn hiện có.",
+      "refused": true,
+      "retrieval_source": "none",
+      "best_dense_score": 0.8733,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/qc-dao-tao-thac-si-2021.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/qc-dao-tao-thac-si-2021.md",
+        "legal/so-tay-sinh-vien-k60.md"
+      ],
+      "elapsed_ms": 3578.6,
+      "llm_ms": 3542.1,
+      "citations": [],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 0.0,
+        "context_precision": 0.0,
+        "faithfulness": 0.125,
+        "answer_relevance": 0.0
+      }
+    },
+    {
+      "id": "Q12",
+      "type": "conflict",
+      "question": "Ai quản lý ký túc xá của trường?",
+      "config": "B",
+      "answer": "Ban Quản lý Ký túc xá là đơn vị có chức năng giúp Hiệu trưởng quản lý toàn diện khu Ký túc xá của trường [1]. Hiện tại, Trưởng ban là ThS. Mai Đức Anh và Phó Trưởng ban là CN. Hàn Xuân Trung [2].",
+      "refused": false,
+      "retrieval_source": "hybrid",
+      "best_dense_score": 0.9079,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "news/ban-quan-ly-ky-tuc-xa.md",
+        "news/ban-quan-ly-ky-tuc-xa.md",
+        "news/ban-quan-ly-ky-tuc-xa.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "news/ban-quan-ly-ky-tuc-xa.md"
+      ],
+      "elapsed_ms": 4559.0,
+      "llm_ms": 4528.5,
+      "citations": [
+        "[1]",
+        "[2]"
+      ],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 0.0,
+        "context_precision": 0.0,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.10714285714285715
+      }
+    },
+    {
+      "id": "Q13",
+      "type": "multi_hop",
+      "question": "Hỏi về học bổng và vay vốn tín dụng đào tạo thì liên hệ đơn vị nào?",
+      "config": "B",
+      "answer": "- **Về học bổng:** Sinh viên liên hệ với Khoa để được giải đáp các thắc mắc [3]. Để cập nhật thông tin học bổng du học hoặc tuyển dụng, sinh viên liên hệ Bộ môn trực thuộc hoặc theo dõi trang thông tin điện tử của Trường, Khoa, Bộ môn [1].\n- **Về vay vốn tín dụng:** Sinh viên đăng ký online thông qua dịch vụ trực tuyến tại website http://sis.utc.edu.vn [5]. Kết quả được nhận tại Văn phòng Hỗ trợ sinh viên (P105 – Nhà N2) [5].",
+      "refused": false,
+      "retrieval_source": "hybrid",
+      "best_dense_score": 0.8682,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/so-tay-ho-tro-co-van-hoc-tap.md",
+        "legal/so-tay-ho-tro-co-van-hoc-tap.md",
+        "legal/so-tay-ho-tro-co-van-hoc-tap.md",
+        "legal/so-tay-sinh-vien-k60.md"
+      ],
+      "elapsed_ms": 5356.0,
+      "llm_ms": 5321.3,
+      "citations": [
+        "[1]",
+        "[3]",
+        "[5]"
+      ],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 0.5,
+        "context_precision": 0.0,
+        "faithfulness": 0.9772727272727273,
+        "answer_relevance": 0.225
+      }
+    },
+    {
+      "id": "Q14",
+      "type": "multi_hop",
+      "question": "Học phí thu theo tín chỉ, vậy đơn vị nào chịu trách nhiệm thu học phí của sinh viên?",
+      "config": "B",
+      "answer": "Việc thu học phí của sinh viên được thực hiện thông qua tài khoản cá nhân của sinh viên tại Ngân hàng Agribank [2]. Phòng Tài chính Kế toán là đơn vị chịu trách nhiệm xử lý các vấn đề liên quan đến thu học phí và cập nhật thông tin lên trang Quản lý đào tạo [1], [3].",
+      "refused": false,
+      "retrieval_source": "hybrid",
+      "best_dense_score": 0.8852,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/so-tay-sinh-vien-k60.md"
+      ],
+      "elapsed_ms": 5577.8,
+      "llm_ms": 5544.3,
+      "citations": [
+        "[1]",
+        "[2]",
+        "[3]"
+      ],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 0.0,
+        "context_precision": 0.0,
+        "faithfulness": 0.875,
+        "answer_relevance": 0.28571428571428575
+      }
+    },
+    {
+      "id": "Q15",
+      "type": "multi_part",
+      "question": "Tra cứu tài liệu thư viện trực tuyến ở đâu và thư viện phục vụ những đối tượng nào?",
+      "config": "B",
+      "answer": "Bạn có thể tra cứu tài liệu trực tuyến (OPAC) tại địa chỉ: http://opac.utc.edu.vn [2], [3].\n\nĐối tượng bạn đọc của thư viện bao gồm: Giảng viên, cán bộ nghiên cứu, nghiên cứu sinh, học viên cao học và sinh viên trong và ngoài Trường [2].",
+      "refused": false,
+      "retrieval_source": "hybrid",
+      "best_dense_score": 0.8885,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "legal/so-tay-sinh-vien-k60.md",
+        "news/trung-tam-thong-tin-thu-vien.md",
+        "news/trung-tam-thong-tin-thu-vien.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "news/trung-tam-thong-tin-thu-vien.md"
+      ],
+      "elapsed_ms": 4309.1,
+      "llm_ms": 4247.5,
+      "citations": [
+        "[2]",
+        "[3]"
+      ],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 1.0,
+        "context_precision": 0.5888888888888889,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.8679245283018869
+      }
+    },
+    {
+      "id": "Q16",
+      "type": "lexical",
+      "question": "Thạc sĩ hình thức vừa làm vừa học có kế hoạch học tập chuẩn bao lâu?",
+      "config": "B",
+      "answer": "Thời gian theo kế hoạch học tập chuẩn toàn khóa đối với hình thức đào tạo thạc sĩ vừa làm vừa học là 2,5 năm [1], [2].",
+      "refused": false,
+      "retrieval_source": "hybrid",
+      "best_dense_score": 0.9058,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "legal/qc-dao-tao-thac-si-2021.md",
+        "legal/de-an-tuyen-sinh-2025.md",
+        "legal/qc-dao-tao-thac-si-2021.md",
+        "legal/de-an-tuyen-sinh-2025.md",
+        "legal/de-an-tuyen-sinh-2025.md"
+      ],
+      "elapsed_ms": 3087.3,
+      "llm_ms": 3053.5,
+      "citations": [
+        "[1]",
+        "[2]"
+      ],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 1.0,
+        "context_precision": 0.8333333333333333,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.5185185185185185
+      }
+    },
+    {
+      "id": "Q17",
+      "type": "out_of_domain",
+      "question": "Giá vé máy bay từ Hà Nội đi Đà Nẵng hiện nay là bao nhiêu?",
+      "config": "B",
+      "answer": "Tôi không thể xác minh thông tin này từ nguồn hiện có.",
+      "refused": true,
+      "retrieval_source": "none",
+      "best_dense_score": 0.824,
+      "fallback_triggered": true,
+      "retrieved_docs": [
+        "legal/de-an-tuyen-sinh-2025.md",
+        "legal/qc-dao-tao-thac-si-2021.md",
+        "legal/so-tay-ho-tro-co-van-hoc-tap.md",
+        "legal/de-an-tuyen-sinh-2025.md",
+        "legal/de-an-tuyen-sinh-2025.md"
+      ],
+      "elapsed_ms": 2251.7,
+      "llm_ms": 2220.5,
+      "citations": [],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {},
+      "correct_refusal": true
+    },
+    {
+      "id": "Q18",
+      "type": "out_of_domain",
+      "question": "Trường Đại học Giao thông Vận tải có đào tạo tiến sĩ ngành Y khoa không?",
+      "config": "B",
+      "answer": "Tôi không thể xác minh thông tin này từ nguồn hiện có.",
+      "refused": true,
+      "retrieval_source": "none",
+      "best_dense_score": 0.883,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "legal/qc-dao-tao-thac-si-2021.md",
+        "legal/qc-dao-tao-thac-si-2021.md",
+        "legal/qc-dao-tao-thac-si-2021.md",
+        "legal/qc-dao-tao-thac-si-2021.md",
+        "legal/qc-dao-tao-thac-si-2021.md"
+      ],
+      "elapsed_ms": 2854.5,
+      "llm_ms": 2820.7,
+      "citations": [],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {},
+      "correct_refusal": true
+    },
+    {
+      "id": "Q01",
+      "type": "lexical",
+      "question": "Ký túc xá của trường có bao nhiêu phòng và sức chứa bao nhiêu sinh viên?",
+      "config": "C",
+      "answer": "Ký túc xá của trường có 214 phòng với sức chứa 1500 sinh viên [1].",
+      "refused": false,
+      "retrieval_source": "hybrid",
+      "best_dense_score": 0.9136,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "news/ban-quan-ly-ky-tuc-xa.md",
+        "news/ban-quan-ly-ky-tuc-xa.md",
+        "news/ban-quan-ly-ky-tuc-xa.md",
+        "news/ban-quan-ly-ky-tuc-xa.md",
+        "legal/so-tay-sinh-vien-k60.md"
+      ],
+      "elapsed_ms": 5180.7,
+      "llm_ms": 5079.3,
+      "citations": [
+        "[1]"
+      ],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 1.0,
+        "context_precision": 1.0,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.6451612903225806
+      }
+    },
+    {
+      "id": "Q02",
+      "type": "lexical",
+      "question": "Học phí một tín chỉ của các ngành khối ngành III năm học 2024-2025 là bao nhiêu?",
+      "config": "C",
+      "answer": "Học phí một tín chỉ của các ngành khối ngành III năm học 2024-2025 được quy định như sau:\n\n- Đối với trình độ thạc sĩ: 671.429 đồng/tín chỉ [2].\n- Đối với chương trình chuẩn: 398.060 đồng/tín chỉ [5].\n- Đối với chương trình tiên tiến, chất lượng cao: 694.935 đồng/tín chỉ [5].",
+      "refused": false,
+      "retrieval_source": "hybrid",
+      "best_dense_score": 0.9236,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "legal/de-an-tuyen-sinh-2025.md",
+        "legal/de-an-tuyen-sinh-2025.md",
+        "legal/de-an-tuyen-sinh-2025.md",
+        "legal/de-an-tuyen-sinh-2025.md",
+        "legal/de-an-tuyen-sinh-2025.md"
+      ],
+      "elapsed_ms": 3920.5,
+      "llm_ms": 3810.9,
+      "citations": [
+        "[2]",
+        "[5]"
+      ],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 1.0,
+        "context_precision": 1.0,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.6382978723404255
+      }
+    },
+    {
+      "id": "Q03",
+      "type": "lexical",
+      "question": "Phòng Chăm sóc người học được thành lập theo quyết định số nào?",
+      "config": "C",
+      "answer": "Phòng Chăm sóc người học được thành lập theo Quyết định số 2109/QĐ-ĐHGTVT [1].",
+      "refused": false,
+      "retrieval_source": "hybrid",
+      "best_dense_score": 0.8909,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "news/phong-cong-tac-chinh-tri-va-sinh-vien.md",
+        "news/phong-cong-tac-chinh-tri-va-sinh-vien.md",
+        "news/phong-cong-tac-chinh-tri-va-sinh-vien.md",
+        "news/phong-cong-tac-chinh-tri-va-sinh-vien.md",
+        "legal/so-tay-sinh-vien-k60.md"
+      ],
+      "elapsed_ms": 2898.9,
+      "llm_ms": 2803.1,
+      "citations": [
+        "[1]"
+      ],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 1.0,
+        "context_precision": 1.0,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.631578947368421
+      }
+    },
+    {
+      "id": "Q04",
+      "type": "lexical",
+      "question": "Tổng chỉ tiêu tuyển sinh năm 2025 cho chương trình chuẩn và chất lượng cao là bao nhiêu?",
+      "config": "C",
+      "answer": "Tổng chỉ tiêu tuyển sinh năm 2025 cho các chương trình đào tạo chuẩn và chất lượng cao là 6320 chỉ tiêu [1].",
+      "refused": false,
+      "retrieval_source": "hybrid",
+      "best_dense_score": 0.8957,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "legal/de-an-tuyen-sinh-2025.md",
+        "legal/de-an-tuyen-sinh-2025.md",
+        "legal/de-an-tuyen-sinh-2025.md",
+        "legal/de-an-tuyen-sinh-2025.md",
+        "legal/de-an-tuyen-sinh-2025.md"
+      ],
+      "elapsed_ms": 4969.3,
+      "llm_ms": 4870.7,
+      "citations": [
+        "[1]"
+      ],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 1.0,
+        "context_precision": 1.0,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.5625
+      }
+    },
+    {
+      "id": "Q05",
+      "type": "lexical",
+      "question": "Chương trình thạc sĩ yêu cầu khối lượng tối thiểu bao nhiêu tín chỉ?",
+      "config": "C",
+      "answer": "Chương trình đào tạo trình độ thạc sĩ yêu cầu khối lượng kiến thức là 60 tín chỉ đối với các đối tượng tốt nghiệp đại học cùng nhóm ngành [1].",
+      "refused": false,
+      "retrieval_source": "hybrid",
+      "best_dense_score": 0.8988,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "legal/qc-dao-tao-thac-si-2021.md",
+        "legal/qc-dao-tao-thac-si-2021.md",
+        "legal/qc-dao-tao-thac-si-2021.md",
+        "legal/de-an-tuyen-sinh-2025.md",
+        "news/trung-tam-thong-tin-thu-vien.md"
+      ],
+      "elapsed_ms": 5091.7,
+      "llm_ms": 5004.1,
+      "citations": [
+        "[1]"
+      ],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 1.0,
+        "context_precision": 1.0,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.5641025641025641
+      }
+    },
+    {
+      "id": "Q06",
+      "type": "semantic",
+      "question": "Điểm trung bình thấp tới mức nào thì sinh viên năm nhất bị cảnh báo?",
+      "config": "C",
+      "answer": "Sinh viên năm thứ nhất bị cảnh báo kết quả học tập nếu điểm trung bình chung tích lũy đạt dưới 1,20 [1], [3].",
+      "refused": false,
+      "retrieval_source": "hybrid",
+      "best_dense_score": 0.8805,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/de-an-tuyen-sinh-2025.md",
+        "news/trung-tam-thong-tin-thu-vien.md"
+      ],
+      "elapsed_ms": 2875.5,
+      "llm_ms": 2788.1,
+      "citations": [
+        "[1]",
+        "[3]"
+      ],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 1.0,
+        "context_precision": 1.0,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.8
+      }
+    },
+    {
+      "id": "Q07",
+      "type": "semantic",
+      "question": "Muốn tìm sách của thư viện khi không có mặt ở trường thì làm thế nào?",
+      "config": "C",
+      "answer": "Bạn có thể tra cứu tài liệu trực tuyến thông qua hệ thống OPAC tại địa chỉ: http://opac.utc.edu.vn [2] hoặc lib.utc.edu.vn/opac [5].",
+      "refused": false,
+      "retrieval_source": "hybrid",
+      "best_dense_score": 0.8728,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "legal/so-tay-sinh-vien-k60.md",
+        "news/trung-tam-thong-tin-thu-vien.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/so-tay-sinh-vien-k60.md"
+      ],
+      "elapsed_ms": 5457.1,
+      "llm_ms": 5359.6,
+      "citations": [
+        "[2]",
+        "[5]"
+      ],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 1.0,
+        "context_precision": 0.5,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.7499999999999999
+      }
+    },
+    {
+      "id": "Q08",
+      "type": "semantic",
+      "question": "Đơn vị nào lo việc khám sức khỏe cho sinh viên mới nhập học?",
+      "config": "C",
+      "answer": "Việc khám sức khỏe cho sinh viên mới nhập học được thực hiện bởi các đơn vị sau:\n\n*   **Trạm Y tế:** Tổ chức khám sức khỏe cho học sinh, sinh viên nhập học [1].\n*   **Phòng Công tác chính trị và sinh viên:** Tổ chức khám sức khỏe định kỳ và quản lý hồ sơ sức khỏe cho sinh viên [5].",
+      "refused": false,
+      "retrieval_source": "hybrid",
+      "best_dense_score": 0.8959,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "news/tram-y-te.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "news/tram-y-te.md",
+        "news/tram-y-te.md",
+        "news/phong-cong-tac-chinh-tri-va-sinh-vien.md"
+      ],
+      "elapsed_ms": 6816.6,
+      "llm_ms": 6730.6,
+      "citations": [
+        "[1]",
+        "[5]"
+      ],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 1.0,
+        "context_precision": 0.8055555555555555,
+        "faithfulness": 0.9629629629629629,
+        "answer_relevance": 0.5365853658536585
+      }
+    },
+    {
+      "id": "Q09",
+      "type": "semantic",
+      "question": "Sinh viên bị mất tài sản trong khuôn viên trường thì báo cho đơn vị nào?",
+      "config": "C",
+      "answer": "Tôi không thể xác minh thông tin này từ nguồn hiện có.",
+      "refused": true,
+      "retrieval_source": "none",
+      "best_dense_score": 0.8634,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "news/phong-phap-che-va-kiem-soat-noi-bo.md",
+        "legal/so-tay-ho-tro-co-van-hoc-tap.md",
+        "news/ban-quan-ly-ky-tuc-xa.md"
+      ],
+      "elapsed_ms": 3608.7,
+      "llm_ms": 3524.0,
+      "citations": [],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 0.0,
+        "context_precision": 0.0,
+        "faithfulness": 0.375,
+        "answer_relevance": 0.0
+      }
+    },
+    {
+      "id": "Q10",
+      "type": "semantic",
+      "question": "Học trực tuyến của trường do đơn vị nào vận hành?",
+      "config": "C",
+      "answer": "Hoạt động đào tạo trực tuyến của trường do Trung tâm Đào tạo trực tuyến UTC vận hành với các nhiệm vụ cụ thể như sau:\n\n- Tổ chức tuyển sinh, đào tạo, quản lý học viên, giáo viên, khóa học và bảng điểm [1].\n- Xây dựng, tham gia quản lý cơ sở hạ tầng phục vụ đào tạo trực tuyến (hệ thống phần cứng, nền tảng học tập, phòng học, phòng thu...) [3].\n- Xây dựng quy định, quy chế, quy trình hoạt động đào tạo trực tuyến [4].\n- Cung cấp dịch vụ đào tạo trực tuyến và hợp tác với các đơn vị trong và ngoài nước về lĩnh vực này [1], [3].",
+      "refused": false,
+      "retrieval_source": "hybrid",
+      "best_dense_score": 0.8732,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "news/trung-tam-dao-tao-truc-tuyen-utc.md",
+        "legal/qc-dao-tao-thac-si-2021.md",
+        "news/trung-tam-dao-tao-truc-tuyen-utc.md",
+        "news/trung-tam-dao-tao-truc-tuyen-utc.md",
+        "news/trung-tam-thong-tin-thu-vien.md"
+      ],
+      "elapsed_ms": 5372.7,
+      "llm_ms": 5288.1,
+      "citations": [
+        "[1]",
+        "[3]",
+        "[4]"
+      ],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 0.0,
+        "context_precision": 0.8055555555555555,
+        "faithfulness": 0.9232142857142858,
+        "answer_relevance": 0.19999999999999998
+      }
+    },
+    {
+      "id": "Q11",
+      "type": "confusable",
+      "question": "Đơn vị nào chủ trì việc đánh giá kết quả học tập của sinh viên?",
+      "config": "C",
+      "answer": "Đơn vị chủ trì việc đánh giá kết quả học tập của sinh viên là Phòng Đào tạo đại học [1]. Ngoài ra, Phòng Quản lý chất lượng có nhiệm vụ chủ trì tổ chức các kỳ thi nội bộ và công tác đánh giá kết quả học tập của người học theo quy định hiện hành [2].",
+      "refused": false,
+      "retrieval_source": "hybrid",
+      "best_dense_score": 0.8733,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "news/phong-quan-ly-chat-luong.md",
+        "news/phong-dao-tao-dai-hoc.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/qc-dao-tao-thac-si-2021.md",
+        "legal/so-tay-sinh-vien-k60.md"
+      ],
+      "elapsed_ms": 3704.8,
+      "llm_ms": 3612.8,
+      "citations": [
+        "[1]",
+        "[2]"
+      ],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 1.0,
+        "context_precision": 0.5,
+        "faithfulness": 0.9827586206896552,
+        "answer_relevance": 0.5925925925925927
+      }
+    },
+    {
+      "id": "Q12",
+      "type": "conflict",
+      "question": "Ai quản lý ký túc xá của trường?",
+      "config": "C",
+      "answer": "Ban Quản lý Ký túc xá là đơn vị có chức năng giúp Hiệu trưởng quản lý toàn diện khu ký túc xá của trường [1]. Hiện nay, Trưởng ban là ThS. Mai Đức Anh và Phó Trưởng ban là CN. Hàn Xuân Trung [2].",
+      "refused": false,
+      "retrieval_source": "hybrid",
+      "best_dense_score": 0.9079,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "news/ban-quan-ly-ky-tuc-xa.md",
+        "news/ban-quan-ly-ky-tuc-xa.md",
+        "news/ban-quan-ly-ky-tuc-xa.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/so-tay-ho-tro-co-van-hoc-tap.md"
+      ],
+      "elapsed_ms": 1952.2,
+      "llm_ms": 1857.2,
+      "citations": [
+        "[1]",
+        "[2]"
+      ],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 0.0,
+        "context_precision": 0.0,
+        "faithfulness": 0.9705882352941176,
+        "answer_relevance": 0.14035087719298248
+      }
+    },
+    {
+      "id": "Q13",
+      "type": "multi_hop",
+      "question": "Hỏi về học bổng và vay vốn tín dụng đào tạo thì liên hệ đơn vị nào?",
+      "config": "C",
+      "answer": "Đối với các vấn đề về học bổng và vay vốn tín dụng đào tạo, bạn có thể liên hệ như sau:\n\n- **Về vay vốn tín dụng đào tạo:** Bạn liên hệ Phòng Công tác chính trị và sinh viên (đơn vị thực hiện giải quyết chế độ vay vốn tín dụng đào tạo) [3]. Việc đăng ký cấp giấy xác nhận để vay vốn được thực hiện online [5].\n- **Về học bổng:** Bạn liên hệ Khoa trực thuộc vì Khoa là đơn vị xét học bổng trực tiếp cho sinh viên [4]. Ngoài ra, đối với thông tin học bổng du học hoặc từ doanh nghiệp, bạn có thể liên hệ Bộ môn trực thuộc hoặc theo dõi trang thông tin điện tử của Trường, Khoa, Bộ môn [1].",
+      "refused": false,
+      "retrieval_source": "hybrid",
+      "best_dense_score": 0.8682,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/so-tay-ho-tro-co-van-hoc-tap.md",
+        "news/phong-cong-tac-chinh-tri-va-sinh-vien.md",
+        "legal/so-tay-ho-tro-co-van-hoc-tap.md",
+        "legal/so-tay-ho-tro-co-van-hoc-tap.md"
+      ],
+      "elapsed_ms": 3953.1,
+      "llm_ms": 3858.1,
+      "citations": [
+        "[1]",
+        "[3]",
+        "[4]",
+        "[5]"
+      ],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 0.5,
+        "context_precision": 0.3333333333333333,
+        "faithfulness": 0.9238578088578089,
+        "answer_relevance": 0.3614457831325301
+      }
+    },
+    {
+      "id": "Q14",
+      "type": "multi_hop",
+      "question": "Học phí thu theo tín chỉ, vậy đơn vị nào chịu trách nhiệm thu học phí của sinh viên?",
+      "config": "C",
+      "answer": "Việc thu học phí của sinh viên được thực hiện thông qua tài khoản cá nhân của sinh viên tại Ngân hàng Agribank [2]. Phòng Tài chính Kế toán là đơn vị chịu trách nhiệm xử lý các vấn đề liên quan đến việc thu học phí [1] và cập nhật trạng thái học phí lên trang Quản lý đào tạo [3].",
+      "refused": false,
+      "retrieval_source": "hybrid",
+      "best_dense_score": 0.8852,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "news/trung-tam-thong-tin-thu-vien.md"
+      ],
+      "elapsed_ms": 4320.9,
+      "llm_ms": 4198.7,
+      "citations": [
+        "[1]",
+        "[2]",
+        "[3]"
+      ],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 0.0,
+        "context_precision": 0.0,
+        "faithfulness": 0.8275862068965517,
+        "answer_relevance": 0.28070175438596495
+      }
+    },
+    {
+      "id": "Q15",
+      "type": "multi_part",
+      "question": "Tra cứu tài liệu thư viện trực tuyến ở đâu và thư viện phục vụ những đối tượng nào?",
+      "config": "C",
+      "answer": "Bạn đọc có thể tra cứu tài liệu trực tuyến tại địa chỉ: http://opac.utc.edu.vn [1, 3].\n\nĐối tượng phục vụ của thư viện bao gồm: Giảng viên, cán bộ nghiên cứu, nghiên cứu sinh, học viên cao học và sinh viên trong và ngoài Trường [1].",
+      "refused": false,
+      "retrieval_source": "hybrid",
+      "best_dense_score": 0.8885,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "news/trung-tam-thong-tin-thu-vien.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "news/trung-tam-thong-tin-thu-vien.md",
+        "legal/so-tay-sinh-vien-k60.md",
+        "legal/so-tay-sinh-vien-k60.md"
+      ],
+      "elapsed_ms": 3697.9,
+      "llm_ms": 3602.5,
+      "citations": [
+        "[1]"
+      ],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 1.0,
+        "context_precision": 0.8333333333333333,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.8363636363636363
+      }
+    },
+    {
+      "id": "Q16",
+      "type": "lexical",
+      "question": "Thạc sĩ hình thức vừa làm vừa học có kế hoạch học tập chuẩn bao lâu?",
+      "config": "C",
+      "answer": "Thời gian theo kế hoạch học tập chuẩn toàn khóa đối với hình thức đào tạo thạc sĩ vừa làm vừa học là 2,5 năm [1], [2].",
+      "refused": false,
+      "retrieval_source": "hybrid",
+      "best_dense_score": 0.9058,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "legal/qc-dao-tao-thac-si-2021.md",
+        "legal/de-an-tuyen-sinh-2025.md",
+        "legal/qc-dao-tao-thac-si-2021.md",
+        "legal/de-an-tuyen-sinh-2025.md",
+        "news/phong-dao-tao-dai-hoc.md"
+      ],
+      "elapsed_ms": 4633.8,
+      "llm_ms": 4555.0,
+      "citations": [
+        "[1]",
+        "[2]"
+      ],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {
+        "context_recall": 1.0,
+        "context_precision": 0.8333333333333333,
+        "faithfulness": 1.0,
+        "answer_relevance": 0.5185185185185185
+      }
+    },
+    {
+      "id": "Q17",
+      "type": "out_of_domain",
+      "question": "Giá vé máy bay từ Hà Nội đi Đà Nẵng hiện nay là bao nhiêu?",
+      "config": "C",
+      "answer": "Tôi không thể xác minh thông tin này từ nguồn hiện có.",
+      "refused": true,
+      "retrieval_source": "none",
+      "best_dense_score": 0.824,
+      "fallback_triggered": true,
+      "retrieved_docs": [
+        "legal/de-an-tuyen-sinh-2025.md",
+        "legal/qc-dao-tao-thac-si-2021.md",
+        "legal/so-tay-ho-tro-co-van-hoc-tap.md",
+        "legal/de-an-tuyen-sinh-2025.md",
+        "legal/de-an-tuyen-sinh-2025.md"
+      ],
+      "elapsed_ms": 2192.4,
+      "llm_ms": 2113.4,
+      "citations": [],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {},
+      "correct_refusal": true
+    },
+    {
+      "id": "Q18",
+      "type": "out_of_domain",
+      "question": "Trường Đại học Giao thông Vận tải có đào tạo tiến sĩ ngành Y khoa không?",
+      "config": "C",
+      "answer": "Tôi không thể xác minh thông tin này từ nguồn hiện có.",
+      "refused": true,
+      "retrieval_source": "none",
+      "best_dense_score": 0.883,
+      "fallback_triggered": false,
+      "retrieved_docs": [
+        "legal/qc-dao-tao-thac-si-2021.md",
+        "legal/qc-dao-tao-thac-si-2021.md",
+        "news/tram-y-te.md",
+        "legal/qc-dao-tao-thac-si-2021.md",
+        "legal/qc-dao-tao-thac-si-2021.md"
+      ],
+      "elapsed_ms": 1791.5,
+      "llm_ms": 1707.4,
+      "citations": [],
+      "citations_all_matched": true,
+      "errored": false,
+      "llm_error": "",
+      "metrics": {},
+      "correct_refusal": true
+    }
+  ]
+}
