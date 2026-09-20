@@ -1,0 +1,30 @@
+# Streamlit theme for the RAG demo UI.
+#
+# WHY these values: the palette is defined once in ui/theme.py and mirrored here
+# so that widgets Streamlit renders itself (sliders, chat input, tabs) already
+# match the custom CSS instead of flashing default grey on first paint.
+# Keep the two files in sync - ui/theme.py is the source of truth.
+
+[theme]
+base = "dark"
+primaryColor = "#7C5CFF"
+backgroundColor = "#080C16"
+secondaryBackgroundColor = "#111A2C"
+textColor = "#E9F0FC"
+font = "Be Vietnam Pro, Inter, sans-serif"
+headingFont = "Be Vietnam Pro, Inter, sans-serif"
+codeFont = "JetBrains Mono, monospace"
+baseRadius = "large"
+borderColor = "#243350"
+linkColor = "#22D3EE"
+
+[client]
+# A demo shown on a projector should not carry the deploy/menu chrome.
+toolbarMode = "minimal"
+showErrorDetails = true
+
+[browser]
+gatherUsageStats = false
+
+[server]
+fileWatcherType = "auto"

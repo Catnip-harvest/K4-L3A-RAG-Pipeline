@@ -1,0 +1,34 @@
+{
+  "topic": "Dịch vụ sinh viên và quy chế đào tạo — Trường Đại học Giao thông Vận tải (UTC)",
+  "generated_at": "2026-09-20T07:56:37.468856+00:00",
+  "documents": [
+    {
+      "filename": "de-an-tuyen-sinh-2025.pdf",
+      "url": "https://tuyensinh.utc.edu.vn/sites/ts.utc.edu.vn/files/29.5.25_%C4%90%E1%BB%81%20%C3%A1n%20tuy%E1%BB%83n%20sinh%202025.pdf",
+      "sha256": "e5380e075ab6013f0e70a68b8443e82b282263b93a036d3bd675d70172c81d76",
+      "bytes": 890095,
+      "downloaded_at": "2026-09-20T07:56:27.195628+00:00"
+    },
+    {
+      "filename": "qc-dao-tao-thac-si-2021.pdf",
+      "url": "https://www.utc.edu.vn/Upload/FilePost/2022/06/09/qc-thac-si-2021.pdf",
+      "sha256": "82c02b4283e92e529e38b41d92d865339337a3e2a7442b3e1b0be78a26d58584",
+      "bytes": 793624,
+      "downloaded_at": "2026-09-20T07:56:27.192437+00:00"
+    },
+    {
+      "filename": "so-tay-ho-tro-co-van-hoc-tap.pdf",
+      "url": "https://dee.utc.edu.vn/sites/dee.utc.edu.vn/files/Sotay%20Hotro%20CVHT-SV%20DDT%20V1.0.pdf",
+      "sha256": "6a7f58afb0f02eb7d18aaf4fb15d2922c6d77ba48089a75ff14726cd2058b3e9",
+      "bytes": 401749,
+      "downloaded_at": "2026-09-20T07:56:27.194586+00:00"
+    },
+    {
+      "filename": "so-tay-sinh-vien-k60.pdf",
+      "url": "https://fme.utc.edu.vn/sites/fme.utc.edu.vn/files/SO%20TAY%20SINH%20VIEN%20K60.pdf",
+      "sha256": "daa013976d36dc869945d176314a980db0930c6c65ee6454bc34e37a3ce482f5",
+      "bytes": 1015932,
+      "downloaded_at": "2026-09-20T07:56:27.193745+00:00"
+    }
+  ]
+}

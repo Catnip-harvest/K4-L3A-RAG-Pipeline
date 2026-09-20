@@ -1,0 +1,184 @@
+[
+  {
+    "id": "Q01",
+    "type": "lexical",
+    "question": "Ký túc xá của trường có bao nhiêu phòng và sức chứa bao nhiêu sinh viên?",
+    "expected_answer": "Ký túc xá có 03 khối nhà vĩnh cửu 4-5 tầng, tổng số 214 phòng khép kín, sức chứa 1500 sinh viên.",
+    "expected_context": "tổng số 214 phòng hoàn toàn có công trình phụ khép kín với sức chứa 1500 sinh viên",
+    "context_keys": ["214 phòng", "1500 sinh viên"],
+    "gold_doc_ids": ["news/ban-quan-ly-ky-tuc-xa.md"],
+    "why": "Hai con số nguyên văn. BM25 bắt được ngay; dense dễ trả về mô tả chung về ký túc xá mà không kèm số. Đây là ca kiểm soát: hỏng ở đây nghĩa là pipeline hỏng, không phải chiến lược hỏng."
+  },
+  {
+    "id": "Q02",
+    "type": "lexical",
+    "question": "Học phí một tín chỉ của các ngành khối ngành III năm học 2024-2025 là bao nhiêu?",
+    "expected_answer": "Năm học 2024-2025, chương trình chuẩn khối ngành III thu 398.060 đồng/1 tín chỉ.",
+    "expected_context": "các ngành thuộc khối ngành III là 398.060 đồng /1 tín chỉ",
+    "context_keys": ["398.060", "khối ngành III"],
+    "gold_doc_ids": ["legal/de-an-tuyen-sinh-2025.md"],
+    "why": "Con số có dấu chấm phân cách nghìn. Tokenizer và embedding xử lý số rất kém; BM25 giữ nguyên chuỗi."
+  },
+  {
+    "id": "Q03",
+    "type": "lexical",
+    "question": "Phòng Chăm sóc người học được thành lập theo quyết định số nào?",
+    "expected_answer": "Theo Quyết định số 2109/QĐ-ĐHGTVT.",
+    "expected_context": "Phòng Chăm sóc người học được thành lập theo Quyết định số 2109/QĐ-ĐHGTVT",
+    "context_keys": ["2109/QĐ-ĐHGTVT"],
+    "gold_doc_ids": ["news/phong-cong-tac-chinh-tri-va-sinh-vien.md"],
+    "why": "Mã văn bản hành chính — trường hợp kinh điển dense thua BM25. Embedding kéo về các tài liệu NÓI VỀ quyết định, không phải đúng quyết định đó."
+  },
+  {
+    "id": "Q04",
+    "type": "lexical",
+    "question": "Tổng chỉ tiêu tuyển sinh năm 2025 cho chương trình chuẩn và chất lượng cao là bao nhiêu?",
+    "expected_answer": "6320 chỉ tiêu cho chương trình chuẩn và chất lượng cao, cộng thêm 40 chỉ tiêu liên kết quốc tế.",
+    "expected_context": "Tổng chỉ tiêu các chương trình đào tạo (CTĐT) chuẩn và CTĐT chất lượng cao (CLC): 6320",
+    "context_keys": ["6320"],
+    "gold_doc_ids": ["legal/de-an-tuyen-sinh-2025.md"],
+    "why": "Con số nằm ngay trước một bảng bị MarkItDown làm vỡ cấu trúc. Kiểm tra chunking có giữ được số dính với nhãn của nó không."
+  },
+  {
+    "id": "Q05",
+    "type": "lexical",
+    "question": "Chương trình thạc sĩ yêu cầu khối lượng tối thiểu bao nhiêu tín chỉ?",
+    "expected_answer": "Tối thiểu 60 tín chỉ đối với người tốt nghiệp đại học cùng nhóm ngành.",
+    "expected_context": "Đảm bảo khối lượng kiến thức 60 tín chỉ",
+    "context_keys": ["60 tín chỉ"],
+    "gold_doc_ids": ["legal/qc-dao-tao-thac-si-2021.md"],
+    "why": "Corpus có rất nhiều cụm '<số> tín chỉ' (15, 30, 24, 12). Kiểm tra retrieval lấy đúng con số gắn với ngữ cảnh 'khối lượng chương trình' chứ không phải con số gần nhất."
+  },
+  {
+    "id": "Q06",
+    "type": "semantic",
+    "question": "Điểm trung bình thấp tới mức nào thì sinh viên năm nhất bị cảnh báo?",
+    "expected_answer": "Sinh viên năm thứ nhất bị cảnh báo khi điểm trung bình chung tích luỹ dưới 1,20.",
+    "expected_context": "Điểm trung bình chung tích luỹ đạt dưới 1,20 đối với sinh viên năm thứ",
+    "context_keys": ["dưới 1,20"],
+    "gold_doc_ids": ["legal/so-tay-sinh-vien-k60.md"],
+    "why": "Câu hỏi dùng 'thấp tới mức nào', tài liệu dùng 'đạt dưới'. Không chia sẻ từ khoá quyết định, nên cần dense."
+  },
+  {
+    "id": "Q07",
+    "type": "semantic",
+    "question": "Muốn tìm sách của thư viện khi không có mặt ở trường thì làm thế nào?",
+    "expected_answer": "Tra cứu trực tuyến qua hệ thống OPAC tại http://opac.utc.edu.vn.",
+    "expected_context": "Bạn đọc có thể tra cứu trực tuyến (OPAC)",
+    "context_keys": ["opac.utc.edu.vn"],
+    "gold_doc_ids": ["news/trung-tam-thong-tin-thu-vien.md"],
+    "why": "'Không có mặt ở trường' phải được hiểu là 'trực tuyến'. Không có từ nào trùng, BM25 sẽ trượt hoàn toàn."
+  },
+  {
+    "id": "Q08",
+    "type": "semantic",
+    "question": "Đơn vị nào lo việc khám sức khỏe cho sinh viên mới nhập học?",
+    "expected_answer": "Trạm Y tế tổ chức khám sức khỏe cho học sinh, sinh viên khi nhập học và trước khi tốt nghiệp.",
+    "expected_context": "Tổ chức khám sức khỏe cho học sinh, sinh viên nhập học",
+    "context_keys": ["khám sức khỏe"],
+    "gold_doc_ids": ["news/tram-y-te.md"],
+    "why": "Trang Trạm Y tế là một đoạn văn rất dài liệt kê hàng chục nhiệm vụ. Kiểm tra chunk 500 ký tự có tách được đúng mệnh đề cần thiết không."
+  },
+  {
+    "id": "Q09",
+    "type": "semantic",
+    "question": "Sinh viên bị mất tài sản trong khuôn viên trường thì báo cho đơn vị nào?",
+    "expected_answer": "Phòng Bảo vệ, đơn vị phụ trách công tác an ninh trật tự trong trường.",
+    "expected_context": "công tác an ninh trật tự",
+    "context_keys": ["an ninh trật tự"],
+    "gold_doc_ids": ["news/phong-bao-ve.md"],
+    "why": "Corpus không có chữ 'mất tài sản'. Đáp án chỉ tới được bằng suy luận ngữ nghĩa 'mất đồ' -> 'an ninh trật tự'."
+  },
+  {
+    "id": "Q10",
+    "type": "semantic",
+    "question": "Học trực tuyến của trường do đơn vị nào vận hành?",
+    "expected_answer": "Trung tâm Đào tạo trực tuyến UTC (UTC E-learning Center).",
+    "expected_context": "Trung tâm Đào tạo trực tuyến UTC",
+    "context_keys": ["Đào tạo trực tuyến"],
+    "gold_doc_ids": ["news/trung-tam-dao-tao-truc-tuyen-utc.md"],
+    "why": "Tài liệu ngắn nhất trong corpus. Kiểm tra tài liệu nhỏ có bị các tài liệu dài lấn át trong xếp hạng không."
+  },
+  {
+    "id": "Q11",
+    "type": "confusable",
+    "question": "Đơn vị nào chủ trì việc đánh giá kết quả học tập của sinh viên?",
+    "expected_answer": "Phòng Đào tạo đại học chủ trì việc đánh giá kết quả học tập của sinh viên theo quy chế.",
+    "expected_context": "đánh giá kết quả học tập của sinh viên",
+    "context_keys": ["đánh giá kết quả học tập của sinh viên"],
+    "gold_doc_ids": ["news/phong-dao-tao-dai-hoc.md"],
+    "trap_doc_ids": ["news/phong-quan-ly-chat-luong.md"],
+    "why": "Phòng Quản lý chất lượng thật sự có tổ chức khảo thí, nên nó đúng về ngữ nghĩa nhưng sai về thẩm quyền. Ca này đo khả năng phân biệt hai đơn vị gần nhau."
+  },
+  {
+    "id": "Q12",
+    "type": "conflict",
+    "question": "Ai quản lý ký túc xá của trường?",
+    "expected_answer": "Phòng Chăm sóc người học. Theo QĐ số 2109/QĐ-ĐHGTVT, phòng này được lập trên cơ sở sáp nhập Phòng CTCT&SV, Ban Quản lý KTX và Trạm Y tế, nên công tác quản lý sinh viên nội trú nay thuộc phòng này.",
+    "expected_context": "sáp nhập lại Phòng CTCT&SV, Ban Quản lý KTX, Trạm Y tế",
+    "context_keys": ["sáp nhập lại Phòng CTCT&SV"],
+    "gold_doc_ids": ["news/phong-cong-tac-chinh-tri-va-sinh-vien.md"],
+    "trap_doc_ids": ["news/ban-quan-ly-ky-tuc-xa.md"],
+    "why": "Hai câu trả lời chính thức mâu thuẫn, cùng crawl một ngày: trang Ban Quản lý KTX vẫn tự giới thiệu là đang hoạt động, còn trang Phòng Chăm sóc người học ghi rằng đã sáp nhập đơn vị đó. Không chiến lược chunking nào sửa được; chỉ metadata document_version/supersedes mới giải quyết."
+  },
+  {
+    "id": "Q13",
+    "type": "multi_hop",
+    "question": "Hỏi về học bổng và vay vốn tín dụng đào tạo thì liên hệ đơn vị nào?",
+    "expected_answer": "Phòng Chăm sóc người học giải quyết chế độ chính sách, vay vốn tín dụng đào tạo và học bổng tài trợ. Riêng học bổng khuyến khích học tập do Phòng Đào tạo đại học chủ trì xét.",
+    "expected_context": "vay vốn tín dụng đào tạo",
+    "context_keys": ["vay vốn tín dụng", "học bổng khuyến khích học tập"],
+    "gold_doc_ids": ["news/phong-cong-tac-chinh-tri-va-sinh-vien.md", "news/phong-dao-tao-dai-hoc.md"],
+    "why": "Đáp án nằm ở hai tài liệu. Chấm theo doc_id sẽ thấy 'đúng' vì một trong hai lọt top-3; chấm theo nội dung mới lộ ra là thiếu một nửa."
+  },
+  {
+    "id": "Q14",
+    "type": "multi_hop",
+    "question": "Học phí thu theo tín chỉ, vậy đơn vị nào chịu trách nhiệm thu học phí của sinh viên?",
+    "expected_answer": "Phòng Kế hoạch - Tài chính đôn đốc thu đúng, thu đủ, kịp thời học phí, lệ phí và các khoản thu.",
+    "expected_context": "đôn đốc thu đúng, thu đủ, kịp thời học phí",
+    "context_keys": ["thu đúng, thu đủ"],
+    "gold_doc_ids": ["news/phong-ke-hoach-tai-chinh.md"],
+    "why": "Mức học phí nằm trong tài liệu legal, còn đơn vị thu nằm trong tài liệu news. Ca này kiểm tra corpus lai giữa hai loại nguồn có nối được với nhau không."
+  },
+  {
+    "id": "Q15",
+    "type": "multi_part",
+    "question": "Tra cứu tài liệu thư viện trực tuyến ở đâu và thư viện phục vụ những đối tượng nào?",
+    "expected_answer": "Tra cứu trực tuyến (OPAC) tại http://opac.utc.edu.vn. Đối tượng bạn đọc gồm giảng viên, cán bộ nghiên cứu, nghiên cứu sinh, học viên cao học và sinh viên trong và ngoài Trường.",
+    "expected_context": "Đối tượng bạn đọc",
+    "context_keys": ["opac.utc.edu.vn", "Đối tượng bạn đọc"],
+    "gold_doc_ids": ["news/trung-tam-thong-tin-thu-vien.md"],
+    "why": "Hai phần đáp án nằm ở hai chunk khác nhau của CÙNG một tài liệu. Chunk nhỏ lấy đúng tài liệu mà vẫn thiếu nửa câu trả lời — đây chính là chi phí của chunk_size nhỏ."
+  },
+  {
+    "id": "Q16",
+    "type": "lexical",
+    "question": "Thạc sĩ hình thức vừa làm vừa học có kế hoạch học tập chuẩn bao lâu?",
+    "expected_answer": "2,5 năm theo kế hoạch học tập chuẩn toàn khoá.",
+    "expected_context": "vừa làm vừa học là 2,5 năm",
+    "context_keys": ["2,5 năm"],
+    "gold_doc_ids": ["legal/qc-dao-tao-thac-si-2021.md"],
+    "why": "Cùng một điều khoản có hai mốc thời gian (02 năm chính quy, 2,5 năm vừa làm vừa học). Kiểm tra retrieval có lấy đúng nhánh không."
+  },
+  {
+    "id": "Q17",
+    "type": "out_of_domain",
+    "question": "Giá vé máy bay từ Hà Nội đi Đà Nẵng hiện nay là bao nhiêu?",
+    "expected_answer": "Tôi không thể xác minh thông tin này từ nguồn hiện có.",
+    "expected_context": "(không có trong corpus — hệ thống phải từ chối trả lời)",
+    "context_keys": [],
+    "gold_doc_ids": [],
+    "why": "Ngoài domain hoàn toàn, không chia sẻ từ vựng với corpus. Dùng để hiệu chỉnh cận dưới của SCORE_THRESHOLD."
+  },
+  {
+    "id": "Q18",
+    "type": "out_of_domain",
+    "question": "Trường Đại học Giao thông Vận tải có đào tạo tiến sĩ ngành Y khoa không?",
+    "expected_answer": "Tôi không thể xác minh thông tin này từ nguồn hiện có.",
+    "expected_context": "(không có trong corpus — hệ thống phải từ chối trả lời)",
+    "context_keys": [],
+    "gold_doc_ids": [],
+    "why": "Ca khó hơn Q17: đúng tên trường, đúng từ vựng đào tạo, nhưng ngành không tồn tại trong corpus. Dense sẽ trả về điểm cao giả. Đây là ca quyết định cận trên của threshold — nếu threshold quá thấp, hệ thống sẽ bịa."
+  }
+]

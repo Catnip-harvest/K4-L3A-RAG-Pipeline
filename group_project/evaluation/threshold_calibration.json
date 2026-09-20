@@ -1,0 +1,85 @@
+{
+  "embedding_model": "intfloat/multilingual-e5-small",
+  "top_k": 10,
+  "in_domain": [
+    {
+      "id": "Q01",
+      "best_dense_score": 0.9136337041854858
+    },
+    {
+      "id": "Q02",
+      "best_dense_score": 0.9236352443695068
+    },
+    {
+      "id": "Q03",
+      "best_dense_score": 0.8909215331077576
+    },
+    {
+      "id": "Q04",
+      "best_dense_score": 0.8957416415214539
+    },
+    {
+      "id": "Q05",
+      "best_dense_score": 0.8987778425216675
+    },
+    {
+      "id": "Q06",
+      "best_dense_score": 0.8805482983589172
+    },
+    {
+      "id": "Q07",
+      "best_dense_score": 0.872837245464325
+    },
+    {
+      "id": "Q08",
+      "best_dense_score": 0.8959347009658813
+    },
+    {
+      "id": "Q09",
+      "best_dense_score": 0.8634359240531921
+    },
+    {
+      "id": "Q10",
+      "best_dense_score": 0.8732225298881531
+    },
+    {
+      "id": "Q11",
+      "best_dense_score": 0.8733350038528442
+    },
+    {
+      "id": "Q12",
+      "best_dense_score": 0.9078510403633118
+    },
+    {
+      "id": "Q13",
+      "best_dense_score": 0.8681643009185791
+    },
+    {
+      "id": "Q14",
+      "best_dense_score": 0.8851597309112549
+    },
+    {
+      "id": "Q15",
+      "best_dense_score": 0.8885174989700317
+    },
+    {
+      "id": "Q16",
+      "best_dense_score": 0.9057540893554688
+    }
+  ],
+  "out_of_domain": [
+    {
+      "id": "Q17",
+      "best_dense_score": 0.8240301609039307
+    },
+    {
+      "id": "Q18",
+      "best_dense_score": 0.8830491304397583
+    }
+  ],
+  "in_domain_min": 0.8634359240531921,
+  "out_of_domain_max": 0.8830491304397583,
+  "separable": false,
+  "recommended_threshold": 0.853,
+  "repo_default": 0.3
+}
