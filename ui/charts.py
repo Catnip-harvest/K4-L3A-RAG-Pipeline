@@ -3,11 +3,15 @@
 Every figure here obeys the same three rules, which is why they read as one
 system rather than four separate charts:
 
-1. The colour of a stage is fixed by ``ui.theme`` — violet is always dense,
-   cyan is always BM25, amber is always the fused/hybrid path, rose is always
-   the fallback. A colour learned on the SVG diagram means the same thing here.
+1. Colour is never decoration. A hue appears only where it names a retrieval
+   path, and the mapping is fixed by ``ui.theme`` — indigo is always dense, teal
+   is always BM25, amber is always the fused/hybrid path, rose is always the
+   fallback. A colour learned on the SVG diagram means the same thing here.
+   Everything that is not a path — gridlines, ticks, axis titles, annotations,
+   hover chrome, the mode bar — is a neutral grey, and all of those neutrals are
+   owned by ``_base_layout`` so an individual chart can only ever add signal.
 2. Paper and plot backgrounds are transparent so the figures sit on the app's
-   own gradient instead of punching grey rectangles into it.
+   own white cards instead of punching panels into them.
 3. No chartjunk: no vertical gridlines where they carry nothing, no legend when
    a single series is plotted, no mode bar (passed via ``PLOTLY_CONFIG``).
 """
@@ -18,24 +22,34 @@ from typing import Any
 
 import plotly.graph_objects as go
 
-from .theme import COLORS
+from .theme import COLORS, FONT_STACK, MONO_STACK
 
 # Passed to every st.plotly_chart call. A mode bar on a projector is noise.
 PLOTLY_CONFIG: dict[str, Any] = {"displayModeBar": False, "responsive": True}
 
-_FONT = "Be Vietnam Pro, Inter, sans-serif"
-_MONO = "JetBrains Mono, monospace"
+_FONT = FONT_STACK
+_MONO = MONO_STACK
+
+# Gridlines sit one step lighter than ``border`` so they read as texture rather
+# than structure. ``border_soft`` is the theme's name for it; the literal is the
+# documented fallback in case the token is ever dropped.
+_GRID = COLORS.get("border_soft") or "#EDF1F6"
 
 
 def _base_layout(fig: go.Figure, *, height: int, title: str = "") -> go.Figure:
-    """Apply the shared look: transparent, tight margins, Vietnamese-safe font."""
+    """Apply the shared look: transparent, light, tight margins, Vietnamese-safe font.
+
+    This function owns every neutral in the chart — background, gridlines,
+    zero lines, tick labels, axis titles, hover card, legend and mode bar — so
+    the chart builders above only ever choose *signal* colours.
+    """
     fig.update_layout(
-        template="plotly_dark",
+        template="plotly_white",
         height=height,
         margin=dict(l=8, r=8, t=44 if title else 14, b=8),
         paper_bgcolor="rgba(0,0,0,0)",
         plot_bgcolor="rgba(0,0,0,0)",
-        font=dict(family=_FONT, size=12, color=COLORS["text_dim"]),
+        font=dict(family=_FONT, size=12, color=COLORS["muted"]),
         title=dict(
             text=title,
             font=dict(size=13.5, color=COLORS["muted"], family=_FONT),
@@ -44,7 +58,7 @@ def _base_layout(fig: go.Figure, *, height: int, title: str = "") -> go.Figure:
             y=0.97,
         ) if title else None,
         hoverlabel=dict(
-            bgcolor=COLORS["surface_2"],
+            bgcolor=COLORS["surface"],
             bordercolor=COLORS["border"],
             font=dict(family=_FONT, size=12, color=COLORS["text"]),
         ),
@@ -53,10 +67,31 @@ def _base_layout(fig: go.Figure, *, height: int, title: str = "") -> go.Figure:
             yanchor="bottom",
             y=-0.22,
             x=0,
-            font=dict(size=11),
+            font=dict(size=11, family=_FONT, color=COLORS["text_dim"]),
+            bgcolor="rgba(0,0,0,0)",
+            borderwidth=0,
+        ),
+        modebar=dict(
+            color=COLORS["faint"],
+            activecolor=COLORS["accent"],
             bgcolor="rgba(0,0,0,0)",
         ),
     )
+
+    # Colour-only axis defaults. These merge into whatever each chart already
+    # set, so a per-chart ``showgrid=False`` survives while the palette stays in
+    # one place. A figure with no cartesian axes (the gauge) ignores them.
+    axis_neutrals = dict(
+        gridcolor=_GRID,
+        zerolinecolor=COLORS["border"],
+        linecolor=COLORS["border"],
+        showline=False,
+        tickcolor=COLORS["border_strong"],
+        tickfont=dict(color=COLORS["muted"]),
+        title=dict(font=dict(family=_FONT, color=COLORS["text_dim"])),
+    )
+    fig.update_xaxes(**axis_neutrals)
+    fig.update_yaxes(**axis_neutrals)
     return fig
 
 
@@ -114,6 +149,8 @@ def rank_movement_slope(trace: dict[str, Any]) -> go.Figure:
         y = [row.get("dense_rank"), row.get("bm25_rank"), row.get("final_rank")]
         kept = row.get("final_rank") is not None
         group = "kept" if kept else "dropped"
+        # Dropped candidates are mid-grey, not a tint: on a projector anything
+        # lighter than ``muted`` disappears against the white card.
         line_color = COLORS["hybrid"] if kept else COLORS["muted"]
         marker_colors = column_colors if kept else [COLORS["muted"]] * 3
 
@@ -135,7 +172,8 @@ def rank_movement_slope(trace: dict[str, Any]) -> go.Figure:
             marker=dict(
                 size=13 if kept else 9,
                 color=marker_colors,
-                line=dict(color=COLORS["bg"], width=2),
+                # A white halo, not the page colour: these dots sit on a card.
+                line=dict(color=COLORS["surface"], width=2),
             ),
             opacity=1.0 if kept else 0.62,
             customdata=[[_short(row.get("title", ""), 60),
@@ -145,7 +183,8 @@ def rank_movement_slope(trace: dict[str, Any]) -> go.Figure:
                 "<b>%{customdata[0]}</b><br>"
                 "hạng: %{y}<br>"
                 "RRF: %{customdata[1]:.5f}<br>"
-                "<span style='opacity:.6'>%{customdata[2]}</span>"
+                '<span style="color:' + COLORS["muted"] + '">'
+                "%{customdata[2]}</span>"
                 "<extra></extra>"
             ),
         ))
@@ -166,9 +205,8 @@ def rank_movement_slope(trace: dict[str, Any]) -> go.Figure:
     )
     fig.update_yaxes(
         autorange="reversed", dtick=1, range=[max_rank + 0.5, 0.5],
-        title=dict(text="thứ hạng (1 = tốt nhất)",
-                   font=dict(size=11, color=COLORS["faint"])),
-        gridcolor=COLORS["border_soft"], zeroline=False,
+        title=dict(text="thứ hạng (1 = tốt nhất)", font=dict(size=11)),
+        zeroline=False,
         tickfont=dict(family=_MONO, size=11),
     )
     return _base_layout(fig, height=max(330, 150 + 34 * min(len(rows), 10)))
@@ -219,8 +257,9 @@ def score_comparison_bars(trace: dict[str, Any]) -> go.Figure:
     for name, values, raw, color, fmt in series:
         fig.add_trace(go.Bar(
             x=labels, y=values, name=name,
+            # Full opacity: the three hues are already balanced in perceived
+            # weight, and fading them against white would unbalance them.
             marker=dict(color=color, line=dict(width=0)),
-            opacity=0.92,
             customdata=[[t, r if r is not None else float("nan")]
                         for t, r in zip(titles, raw)],
             hovertemplate=(
@@ -233,6 +272,7 @@ def score_comparison_bars(trace: dict[str, Any]) -> go.Figure:
     if threshold is not None:
         # Only the dense series is on the same scale as the threshold, so the
         # line is annotated as such rather than presented as a global cut-off.
+        # Rose because crossing below it is what sends the query to fallback.
         fig.add_hline(
             y=float(threshold), line=dict(color=COLORS["fallback"], width=1.2,
                                           dash="dash"),
@@ -244,13 +284,12 @@ def score_comparison_bars(trace: dict[str, Any]) -> go.Figure:
     fig.update_layout(barmode="group", bargap=0.28, bargroupgap=0.08)
     fig.update_xaxes(
         showgrid=False, zeroline=False,
-        title=dict(text="hạng cuối của chunk",
-                   font=dict(size=11, color=COLORS["faint"])),
+        title=dict(text="hạng cuối của chunk", font=dict(size=11)),
         tickfont=dict(family=_MONO, size=11),
     )
     fig.update_yaxes(
-        gridcolor=COLORS["border_soft"], zeroline=False, rangemode="tozero",
-        title=dict(text="điểm (0–1)", font=dict(size=11, color=COLORS["faint"])),
+        rangemode="tozero", zeroline=True,
+        title=dict(text="điểm (0–1)", font=dict(size=11)),
         tickfont=dict(family=_MONO, size=11),
     )
     return _base_layout(fig, height=330)
@@ -260,9 +299,10 @@ def score_comparison_bars(trace: dict[str, Any]) -> go.Figure:
 def threshold_gauge(trace: dict[str, Any]) -> go.Figure:
     """Indicator gauge: best dense cosine against the fallback threshold.
 
-    The red arc is the fallback zone and the green arc is the hybrid zone, so
+    The rose arc is the fallback zone and the amber arc is the hybrid zone, so
     the single needle position answers "why did the pipeline choose this branch"
-    without reading a number.
+    without reading a number. Both arcs use the ``*_soft`` tints rather than a
+    translucent wash, which keeps them legible on a white card.
     """
     best = float(trace.get("best_dense_score") or 0.0)
     threshold = float(trace.get("score_threshold") or 0.0)
@@ -291,25 +331,27 @@ def threshold_gauge(trace: dict[str, Any]) -> go.Figure:
         ),
         title=dict(
             text="<span style='font-size:12px'>điểm dense cao nhất "
-                 f"<span style='color:{COLORS['faint']}'>vs ngưỡng "
+                 f"<span style='color:{COLORS['muted']}'>vs ngưỡng "
                  f"{threshold:.3f} · thang {axis_min:.2f}–1.00</span></span>",
-            font=dict(family=_FONT, color=COLORS["muted"]),
+            font=dict(family=_FONT, color=COLORS["text_dim"]),
         ),
         gauge=dict(
             axis=dict(range=[axis_min, 1], tickwidth=1,
-                      tickcolor=COLORS["border"],
+                      tickcolor=COLORS["border_strong"],
                       tickfont=dict(family=_MONO, size=10,
-                                    color=COLORS["faint"]),
+                                    color=COLORS["muted"]),
                       dtick=round(span / 5, 3)),
             bar=dict(color=accent, thickness=0.26),
             bgcolor="rgba(0,0,0,0)",
-            borderwidth=0,
+            # A hairline keeps the band readable now that the arcs are tints.
+            bordercolor=COLORS["border"],
+            borderwidth=1,
             steps=[
-                dict(range=[axis_min, threshold], color="rgba(251,113,133,.20)"),
-                dict(range=[threshold, 1], color="rgba(52,211,153,.16)"),
+                dict(range=[axis_min, threshold], color=COLORS["fallback_soft"]),
+                dict(range=[threshold, 1], color=COLORS["hybrid_soft"]),
             ],
             threshold=dict(
-                line=dict(color=COLORS["text"], width=2.5),
+                line=dict(color=COLORS["accent"], width=2.5),
                 thickness=0.9, value=threshold,
             ),
         ),
@@ -335,6 +377,7 @@ def latency_breakdown(trace: dict[str, Any]) -> go.Figure:
          COLORS["hybrid"]),
         ("Fallback", float(stages.get("fallback", {}).get("elapsed_ms") or 0.0),
          COLORS["fallback"]),
+        # Generation is green on the pipeline SVG too, so it stays green here.
         ("LLM", float(trace.get("llm_elapsed_ms") or 0.0), COLORS["ok"]),
     ]
     total = sum(value for _, value, _ in segments)
@@ -350,7 +393,8 @@ def latency_breakdown(trace: dict[str, Any]) -> go.Figure:
             text=[f"{name} {value:.0f}ms"] if share > 0.08 else [""],
             textposition="inside",
             insidetextanchor="middle",
-            textfont=dict(family=_MONO, size=11, color=COLORS["bg"]),
+            # White on the saturated fills, not the page colour.
+            textfont=dict(family=_MONO, size=11, color=COLORS["surface"]),
             hovertemplate=f"{name}: %{{x:.1f}} ms ({share:.1%})<extra></extra>",
         ))
 
@@ -364,8 +408,8 @@ def latency_breakdown(trace: dict[str, Any]) -> go.Figure:
 
     fig.update_layout(barmode="stack", bargap=0.45)
     fig.update_xaxes(
-        showgrid=True, gridcolor=COLORS["border_soft"], zeroline=False,
-        title=dict(text="mili-giây", font=dict(size=11, color=COLORS["faint"])),
+        showgrid=True, zeroline=False,
+        title=dict(text="mili-giây", font=dict(size=11)),
         tickfont=dict(family=_MONO, size=10.5),
     )
     fig.update_yaxes(showgrid=False, showticklabels=False, zeroline=False)

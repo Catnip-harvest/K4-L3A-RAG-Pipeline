@@ -182,9 +182,8 @@ if "pending" not in st.session_state:
 
 with st.sidebar:
     st.markdown(
-        '<div style="font-size:1.05rem;font-weight:700;letter-spacing:-.01em">'
-        "Bảng điều khiển pipeline</div>"
-        '<div style="font-size:.78rem;color:#8DA0C0;margin-bottom:10px">'
+        '<div class="rag-panel-title">Bảng điều khiển pipeline</div>'
+        '<div class="rag-note" style="margin-bottom:10px">'
         "Đổi tham số rồi hỏi lại để thấy quyết định thay đổi.</div>",
         unsafe_allow_html=True,
     )
@@ -245,16 +244,14 @@ with st.sidebar:
 
     st.divider()
     st.markdown(
-        '<div style="font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;'
-        'color:#5C6E8C;font-weight:600;margin-bottom:8px">Mã màu</div>',
+        '<div class="rag-label" style="margin-bottom:8px">Mã màu</div>',
         unsafe_allow_html=True,
     )
     st.html(components.color_legend())
 
     st.divider()
     st.markdown(
-        '<div style="font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;'
-        'color:#5C6E8C;font-weight:600;margin-bottom:6px">Câu hỏi thử</div>',
+        '<div class="rag-label" style="margin-bottom:6px">Câu hỏi thử</div>',
         unsafe_allow_html=True,
     )
     for i, question in enumerate(SAMPLE_QUESTIONS):
@@ -456,8 +453,7 @@ def render_evidence(message: dict[str, Any], turn: int) -> None:
     query = message.get("query", "")
 
     st.markdown(
-        '<div style="font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;'
-        'color:#5C6E8C;font-weight:600;margin:2px 0 10px">Dẫn chứng</div>',
+        '<div class="rag-label" style="margin:2px 0 10px">Dẫn chứng</div>',
         unsafe_allow_html=True,
     )
 
@@ -481,7 +477,7 @@ def render_evidence(message: dict[str, Any], turn: int) -> None:
         )
         if weak:
             st.markdown(
-                '<div style="font-size:.78rem;color:#8DA0C0;margin:10px 0 6px">'
+                '<div class="rag-note" style="margin:10px 0 6px">'
                 "Những đoạn gần nhất mà pipeline tìm được nhưng <b>không đạt ngưỡng</b> "
                 "— hiển thị để kiểm chứng, không dùng làm căn cứ trả lời:</div>",
                 unsafe_allow_html=True,
@@ -489,13 +485,25 @@ def render_evidence(message: dict[str, Any], turn: int) -> None:
             st.html(components.source_list(weak, turn=turn, query=query, dimmed=True))
     elif sources:
         st.markdown(
-            '<div style="font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;'
-            'color:#5C6E8C;font-weight:600;margin:12px 0 8px">'
+            '<div class="rag-label" style="margin:12px 0 8px">'
             "Nguồn đã dùng · bấm số [n] trong câu trả lời để nhảy tới</div>",
             unsafe_allow_html=True,
         )
         st.html(components.source_list(sources, turn=turn, query=query))
 
+
+def render_analysis_panel(message: dict[str, Any], turn: int) -> None:
+    """Sơ đồ pipeline và các biểu đồ, chiếm trọn chiều ngang trang.
+
+    Tách khỏi cột dẫn chứng vì lý do rất cụ thể: cột phải chỉ rộng ~270px, mà
+    sơ đồ pipeline có viewBox 1180 đơn vị. Vẽ trong cột đó thì hệ số thu nhỏ
+    còn ~0.23 và nhãn 11px rơi xuống khoảng 2.5px trên màn hình — không ai đọc
+    được, kể cả người ngồi bàn đầu. Đưa xuống dưới hai cột thì sơ đồ có đủ
+    ~820px và nhãn giữ nguyên kích thước thật.
+    """
+    trace, _, _, _, _, decision = turn_facts(message)
+    if not trace:
+        return
     gate = (
         f"{float(trace.get('best_dense_score') or 0):.3f} vs ngưỡng "
         f"{float(trace.get('score_threshold') or 0):.3f}"
@@ -507,36 +515,8 @@ def render_evidence(message: dict[str, Any], turn: int) -> None:
         render_analytics(trace, turn)
 
 
-# Cột phải dính theo màn hình: cuộn hội thoại thì bảng dẫn chứng vẫn ở nguyên
-# chỗ, nên số [n] trong câu trả lời và thẻ nguồn tương ứng luôn cùng trong tầm mắt.
-st.markdown(
-    """
-    <style>
-      [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:nth-of-type(2) > div {
-        position: sticky; top: 8px;
-        max-height: calc(100vh - 32px); overflow-y: auto;
-        padding-right: 4px;
-      }
-      /* Hẹp quá thì hai cột bị bóp đến mức tên file vỡ từng ký tự. Dưới
-         1200px cho chúng xuống dòng thành một cột thay vì cố nhồi cạnh nhau. */
-      @media (max-width: 1200px) {
-        [data-testid="stHorizontalBlock"] { flex-wrap: wrap; }
-        [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] {
-          flex: 1 1 100% !important; min-width: 100% !important;
-        }
-        [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:nth-of-type(2) > div {
-          position: static; max-height: none; overflow-y: visible;
-        }
-      }
-      /* Tên file dài như so-tay-sinh-vien-k60.md không được cắt từng chữ cái. */
-      [data-testid="stColumn"] .src-meta, [data-testid="stColumn"] .src-title {
-        overflow-wrap: break-word; word-break: normal;
-      }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
-
+# Bố cục hai cột. Quy tắc dính theo màn hình và điểm gãy 1200px nằm trong
+# ui/tailwind/input.css — không còn thẻ <style> rải trong file này nữa.
 chat_col, evidence_col = st.columns([1.75, 1], gap="large")
 
 with chat_col:
@@ -549,11 +529,11 @@ with chat_col:
                 render_turn(message, index, latest=False)
 
     if not st.session_state.messages:
-        st.html(components.banner(
-            "Hỏi một câu về quy chế đào tạo hoặc dịch vụ sinh viên của trường. "
-            "Câu trả lời hiện ở đây, còn nguồn và sơ đồ pipeline hiện ở bảng dẫn "
-            "chứng bên phải. Thử nhanh bằng các câu hỏi mẫu ở thanh bên.",
-            kind="info",
+        st.html(components.empty_state(
+            "Hỏi một câu về quy chế hoặc dịch vụ sinh viên",
+            "Câu trả lời hiện ở cột này. Nguồn đã dùng và sơ đồ pipeline hiện ở "
+            "bảng dẫn chứng bên phải. Chưa nghĩ ra câu hỏi thì bấm một câu mẫu "
+            "ở thanh bên.",
         ))
 
 with evidence_col:
@@ -568,12 +548,16 @@ with evidence_col:
     if last_reply is not None:
         render_evidence(last_reply[1], last_reply[0])
     else:
-        st.markdown(
-            '<div style="font-size:.8rem;color:#5C6E8C;padding:18px 14px;'
-            'border:1px dashed #243350;border-radius:14px;text-align:center">'
-            "Nguồn và sơ đồ pipeline của câu trả lời sẽ hiện ở đây.</div>",
-            unsafe_allow_html=True,
-        )
+        st.html(components.empty_state(
+            "Chưa có dẫn chứng",
+            "Mỗi câu trả lời kèm theo các đoạn tài liệu đã dùng, điểm số của "
+            "từng đoạn và sơ đồ pipeline. Chúng sẽ hiện ở đây.",
+        ))
+
+# Phân tích pipeline nằm ngoài hai cột: sơ đồ cần trọn chiều ngang để đọc được
+# khi chiếu lên màn hình lớn.
+if last_reply is not None:
+    render_analysis_panel(last_reply[1], last_reply[0])
 
 # --- input -------------------------------------------------------------------
 typed = st.chat_input("Nhập câu hỏi về quy chế hoặc dịch vụ sinh viên…")
