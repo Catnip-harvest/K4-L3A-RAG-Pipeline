@@ -55,3 +55,7 @@ pageindex_pdfs/
 # OS
 .DS_Store
 Thumbs.db
+
+# Vector store: derived from data/standardized via task4, rebuild with
+#   python -m src.task4_chunking_indexing
+chroma_db/
