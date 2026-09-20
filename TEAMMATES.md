@@ -1,4 +1,4 @@
-# Thành viên — Lab 08: RAG Pipeline
+# Nhóm One Man Army — Lab 08: RAG Pipeline
 
 Lớp K4-L3A · Repository: `Catnip-harvest/K4A-Day08-02563-HoangQuocViet` · Nhánh mặc định: `main`
 
