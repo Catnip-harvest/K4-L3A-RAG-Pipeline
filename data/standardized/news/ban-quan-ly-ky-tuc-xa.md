@@ -1,0 +1,24 @@
+# Ban Quản lý ký túc xá
+
+**Source:** https://www.utc.edu.vn/gioi-thieu/ban-quan-ly-ky-tuc-xa
+
+**Crawled:** 2026-09-20T15:05:23.910039+07:00
+
+**Type:** news
+
+---
+
+# Ban Quản lý ký túc xá
+# BAN QUẢN LÝ KÝ TÚC XÁ
+### THÔNG TIN CHUNG
+Địa chỉ:
+số 99 - đường Nguyễn Chí Thanh - Hà Nội
+Điện thoại:
+024. 37741734
+Trưởng ban: ThS. Mai Đức Anh
+Phó Trưởng ban: CN. Hàn Xuân Trung
+### CHỨC NĂNG NHIỆM VỤ
+Ban quản lý Ký túc xá được thành lập theo quyết định số 390/QĐ-TC, ngày 24 tháng 10 năm 1981 của Hiệu Trưởng trường đại học Giao thông Đường sắt và Đường bộ ( hiện nay là trường đại học Giao thông Vận tải ) . Ban quản lý Ký túc xá có chức năng giúp Hiệu Trưởng quản lý toàn diện khu Ký túc xá của trường ; tổ chức phục vụ về học tập, sinh hoạt của sinh viên được bố trí ở nội trú và đảm bảo trật tự an toàn, vệ sinh, cảnh quan ; tổ chức quản lý, xây dựng, khai thác cơ sở vật chất ; tuyên truyền sinh viên nội trú thực hiện tốt nội quy, quy chế ; phối, kết hợp với các phòng ban chức năng của trường, với cơ quan địa phương tổ chức những hoạt động văn hoá, thể dục, thể thao, phát thanh tuyên truyền, tham gia các hoạt động xã hội ...xây dựng Ký túc xá trở thành nơi có môi trường giáo dục lành mạnh cho sinh viên .
+Ký túc xá của trường có 03 khối nhà vĩnh cửu từ 4 – 5 tầng với tổng số 214 phòng hoàn toàn có công trình phụ khép kín với sức chứa 1500 sinh viên . Cơ sở vật chất dành cho học tập, rèn luyện và sinh hoạt của sinh viên nội trú gồm: Khu giảng đường A5 phục vụ cho việc học tập và tự học của sinh viên, phòng tập Gym, sân bóng rổ đa năng, sân bóng chuyền, cầu lông, đài truyền thanh nội bộ, trạm Y tế, nhà ăn, siêu thị...
+Đội ngũ cán bộ công nhân viên của đơn vị hiện nay gồm 18 người. Chi bộ Đảng gồm 06 Đảng viên thực hiện chức năng, nhiêm vụ nhà trường giao, triển khai công việc 24/24 giờ trong ngày .
+Trong nhiều năm qua, dưới sự chỉ đạo của Đảng uỷ, ban Giám hiệu và sự phối hợp của các phòng ban chức năng, với sự đoàn kết của tập thể cán bộ công nhân viên trong đơn vị, Ký túc xá đã được cấp trên trao tặng những phần thưởng cho sự phấn đấu hoàn thành tốt nhiệm vụ nhà Trường giao cho . Phát huy thành tích đã đạt được, tập thể cán bộ công nhân viên của đơn vị phấn đấu xây dựng Ký túc xá là nơi có môi trường lành mạnh, cảnh quan, văn hoá ; tạo điều kiện cho sinh viên nội trú yên tâm học tập và rèn luyện .
