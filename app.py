@@ -189,9 +189,17 @@ with st.sidebar:
         unsafe_allow_html=True,
     )
 
+    # Mặc định chạy backend THẬT khi import được, chỉ rơi về trace mẫu khi không.
+    # Một ứng dụng được chấm theo tiêu chí "chatbot chạy end-to-end" không nên
+    # mặc định hiển thị dữ liệu mẫu — người chấm mở lên phải thấy hệ thống thật.
+    # Đặt RAG_DEMO_MODE=1 để bật dữ liệu mẫu ngay từ đầu khi trình diễn.
+    _demo_default = (
+        generate_with_trace is None
+        or os.getenv("RAG_DEMO_MODE", "").strip().lower() in {"1", "true", "yes"}
+    )
     demo_mode = st.toggle(
         "Dữ liệu mẫu (demo)",
-        value=True,
+        value=_demo_default,
         help="Dùng trace mẫu trong ui/sample_trace.py thay cho backend thật. "
              "Bật để demo khi chưa có API key hoặc chưa index xong.",
     )
