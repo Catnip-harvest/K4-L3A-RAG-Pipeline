@@ -1,6 +1,6 @@
 # RAG Pipeline — Quy chế và dịch vụ sinh viên UTC
 
-Nhóm **Logitech** · Lớp K4-L3A · Lab 08
+Nhóm **One Man Army** · Lớp K4-L3A · Lab 08
 
 Chatbot hỏi đáp trên bộ tài liệu chính sách và trang dịch vụ của Trường Đại học
 Giao thông Vận tải. Hybrid retrieval (dense + BM25 + RRF), fallback vectorless,
