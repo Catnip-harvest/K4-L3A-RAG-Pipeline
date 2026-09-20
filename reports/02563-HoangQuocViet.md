@@ -5,7 +5,7 @@
 - Họ và tên: Hoàng Quốc Việt
 - Mã học viên: 02563
 - Nhóm: làm cá nhân (buổi này tôi làm một mình, xem `TEAMMATES.md`)
-- Repository/branch: `Catnip-harvest/K4-L3A-RAG-Pipeline`, nhánh `feat/rag-pipeline-utc` → `main`
+- Repository/branch: `Catnip-harvest/K4A-Day08-02563-HoangQuocViet`, nhánh `feat/rag-pipeline-utc` → `main`
 
 ## Phần việc đã thực hiện
 
