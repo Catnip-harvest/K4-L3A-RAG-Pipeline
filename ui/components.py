@@ -193,9 +193,8 @@ def source_card(
     type_label = DOC_TYPE_LABELS.get(doc_type, doc_type.upper() or "TÀI LIỆU")
     url = metadata.get("url")
     link = (
-        f'<a href="{_esc(url)}" target="_blank" rel="noopener" '
-        f'style="font-size:.7rem;color:{COLORS["bm25"]};text-decoration:none">'
-        f"mở nguồn ↗</a>"
+        f'<a class="rag-src__link" href="{_esc(url)}" target="_blank" '
+        f'rel="noopener">mở nguồn ↗</a>'
         if url
         else ""
     )
@@ -207,7 +206,7 @@ def source_card(
         + '">'
         f'<div class="rag-src__head">'
         f'<div class="rag-src__n">{index}</div>'
-        f'<div style="flex:1;min-width:0">'
+        f'<div class="flex-1 min-w-0">'
         f'<p class="rag-src__title">{_esc(metadata.get("title") or result.get("id"))}</p>'
         f'<div class="rag-src__meta">'
         f'{_pill(type_label, COLORS["faint"], dot=False, extra=" rag-pill--type")}'
@@ -219,10 +218,9 @@ def source_card(
         f"<span>{label}</span></div>"
         f"</div>"
         f'<div class="rag-src__bar"><i style="width:{ratio * 100:.1f}%"></i></div>'
-        f"<details style=\"margin-top:10px\">"
-        f'<summary style="cursor:pointer;font-size:.74rem;color:{COLORS["muted"]}">'
-        f"Xem đoạn văn bản gốc</summary>"
-        f'<div class="rag-chunk" style="margin-top:8px">'
+        f"<details>"
+        f"<summary>Xem đoạn văn bản gốc</summary>"
+        f'<div class="rag-chunk mt-2">'
         f"{highlight_terms(result.get('content', ''), query)}</div>"
         f"</details>"
         f"</div>"
@@ -315,8 +313,7 @@ def refusal_card(trace: dict[str, Any], answer: str) -> str:
         '<div class="rag-refusal">'
         '<div class="rag-refusal__h"><span class="ic">!</span>'
         "Không đủ căn cứ trong tài liệu"
-        f'<span style="margin-left:auto;font-size:.68rem;font-weight:600;'
-        f'letter-spacing:.06em;color:{COLORS["muted"]};text-transform:uppercase">'
+        f'<span class="rag-label" style="margin-left:auto">'
         f"{_esc(stage_label)}</span></div>"
         f'<div class="rag-refusal__b">{markdown_to_html(answer)}</div>'
         f'<div class="rag-refusal__n">{note}</div>'
@@ -327,10 +324,10 @@ def refusal_card(trace: dict[str, Any], answer: str) -> str:
 def banner(message: str, *, kind: str = "info") -> str:
     """Inline notice. ``kind`` is ``info`` or ``warn``."""
     icon = "!" if kind == "warn" else "i"
-    color = COLORS["warn"] if kind == "warn" else COLORS["bm25"]
+    color = COLORS["warn"] if kind == "warn" else COLORS["muted"]
     return (
         f'<div class="rag-banner rag-banner--{kind}">'
-        f'<span style="color:{color};font-weight:800;font-family:var(--rag-mono)">'
+        f'<span class="rag-banner__ic" style="color:{color}">'
         f"{icon}</span><div>{message}</div></div>"
     )
 
@@ -351,6 +348,19 @@ def color_legend() -> str:
     return f'<div class="rag-legend">{body}</div>'
 
 
+def empty_state(title: str, subtitle: str) -> str:
+    """A composed "nothing here yet" panel.
+
+    Both empty columns used to render a bare dashed box with one grey sentence
+    in it, which reads as a rendering failure rather than a starting point. A
+    titled state tells the reader the panel is working and waiting.
+    """
+    return (
+        f'<div class="rag-empty"><div><div class="rag-empty__t">{_esc(title)}</div>'
+        f'<div class="rag-empty__s">{_esc(subtitle)}</div></div></div>'
+    )
+
+
 def user_bubble(text: str) -> str:
     """The user's question, as a chat bubble."""
     return f'<div class="rag-userq">{_esc(text)}</div>'
@@ -362,16 +372,12 @@ def reorder_table(trace: dict[str, Any]) -> str:
     if not rows:
         return ""
     cells = "".join(
-        f'<span style="font-family:var(--rag-mono);font-size:.78rem;'
-        f'color:{COLORS["text_dim"]};padding:3px 9px;border-radius:7px;'
-        f'border:1px solid {COLORS["border"]};background:{COLORS["surface_2"]}">'
-        f'#{r.get("from_rank")} <span style="color:{COLORS["faint"]}">→</span> '
-        f'vị trí {r.get("to_rank")}</span>'
+        f'<span class="rag-reorder__c">#{r.get("from_rank")} '
+        f'<em>&rarr;</em> vị trí {r.get("to_rank")}</span>'
         for r in rows
     )
     return (
-        '<div style="display:flex;gap:7px;flex-wrap:wrap;align-items:center">'
-        f'<span style="font-size:.74rem;color:{COLORS["faint"]};'
-        'letter-spacing:.08em;text-transform:uppercase">Sắp xếp lại context</span>'
+        '<div class="rag-reorder">'
+        '<span class="rag-label">Sắp xếp lại context</span>'
         f"{cells}</div>"
     )

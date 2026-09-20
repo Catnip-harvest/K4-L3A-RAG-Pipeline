@@ -59,3 +59,7 @@ Thumbs.db
 # Vector store: derived from data/standardized via task4, rebuild with
 #   python -m src.task4_chunking_indexing
 chroma_db/
+
+# Tailwind build tooling. The compiled ui/tailwind.build.css IS committed so the
+# app runs with no Node toolchain; only the installer output is ignored.
+ui/tailwind/node_modules/
